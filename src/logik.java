@@ -8,6 +8,7 @@ public class logik
     public logik()
     {
         logikFeld = new universell[10][10];
+        initialisieren();
     }
 
     public void initialisieren()
@@ -21,35 +22,35 @@ public class logik
             logikFeld[i][9] = new aussen();
         }
         // freie Felder initialisieren
-        for(int x = 1; x < 9; x++)
+        for(int y = 3; y < 7; y++)
         {
-            for(int y = 3; y < 7; y++)
+            for(int x = 1; x < 9; x++)
             {
                 logikFeld[x][y] = new frei();
             }
         }
         // alle Figuren initialisieren
-        logikFeld[1][1] = new turm();
-        logikFeld[8][1] = new turm();
-        logikFeld[1][8] = new turm();
-        logikFeld[8][8] = new turm();
-        logikFeld[2][1] = new springer();
-        logikFeld[7][1] = new springer();
-        logikFeld[2][8] = new springer();
-        logikFeld[7][8] = new springer();
-        logikFeld[3][1] = new laufer();
-        logikFeld[6][1] = new laufer();
-        logikFeld[3][8] = new laufer();
-        logikFeld[6][8] = new laufer();
-        logikFeld[4][1] = new dame();
-        logikFeld[4][8] = new dame();
-        logikFeld[5][1] = new konig();
-        logikFeld[5][8] = new konig();
+        logikFeld[1][1] = new turm(Color.BLACK, "turmschwarz", "figur");
+        logikFeld[8][1] = new turm(Color.BLACK, "turmschwarz", "figur");
+        logikFeld[1][8] = new turm(Color.WHITE, "turmweiss", "figur");
+        logikFeld[8][8] = new turm(Color.WHITE, "turmweiss", "figur");
+        logikFeld[2][1] = new springer(Color.BLACK, "springerschwarz", "figur");
+        logikFeld[7][1] = new springer(Color.BLACK, "springerschwarz", "figur");
+        logikFeld[2][8] = new springer(Color.WHITE, "springerweiss", "figur");
+        logikFeld[7][8] = new springer(Color.WHITE, "springerweiss", "figur");
+        logikFeld[3][1] = new laufer(Color.BLACK, "lauferschwarz", "figur");
+        logikFeld[6][1] = new laufer(Color.BLACK, "lauferschwarz", "figur");
+        logikFeld[3][8] = new laufer(Color.WHITE, "lauferweiss", "figur");
+        logikFeld[6][8] = new laufer(Color.WHITE, "lauferweiss", "figur");
+        logikFeld[4][1] = new dame(Color.BLACK, "dameschwarz", "figur");
+        logikFeld[4][8] = new dame(Color.WHITE, "dameweiss", "figur");
+        logikFeld[5][1] = new konig(Color.BLACK, "konigschwarz", "figur");
+        logikFeld[5][8] = new konig(Color.WHITE, "konigweiss", "figur");
         // Bauern initialisieren
         for(int i = 1; i < 9; i++)
         {
-            logikFeld[i][2] = new bauer(Color.BLACK, "schwarz");
-            logikFeld[i][7] = new bauer(Color.WHITE, "weiss");
+            logikFeld[i][2] = new bauer(Color.BLACK, "bauerschwarz", "figur");
+            logikFeld[i][7] = new bauer(Color.WHITE, "bauerweiss", "figur");
         }
 
     }

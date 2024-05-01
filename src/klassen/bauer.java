@@ -1,18 +1,16 @@
 package src.klassen;
-
-import java.io.*;
-import java.net.*;
 import java.awt.*;
 import javax.swing.ImageIcon;
 
 public class bauer implements universell
 {
-    Color eigeneFarbe;
-    String eigeneFarbenLink;
-    int eigenePos;
+    public Color eigeneFarbe;
+    public String eigeneFarbenLink, name;
+    public int eigenePos;
 
-    public bauer(Color farbeColor, String farbeString) 
+    public bauer(Color farbeColor, String farbeString, String id) 
     {
+        name = id;
         eigeneFarbe = farbeColor;
         eigeneFarbenLink = farbeString;
     }
@@ -111,9 +109,15 @@ public class bauer implements universell
         }
         return y;
     }
-    public ImageIcon bild(String pfadende)
+
+    public String giveID()
     {
-        String pfad = "lib\\pic\\" + pfadende;
+        return name;
+    }
+
+    public ImageIcon bild()
+    {
+        String pfad = "lib\\pic\\" + eigeneFarbenLink + ".png";
         ImageIcon icon = new ImageIcon(pfad); // Pfade zum Bild ersetzen
         Image image = icon.getImage(); // Bild als Image-Objekt erhalten
         Image scaledImage = image.getScaledInstance(70, 70, Image.SCALE_SMOOTH); // Bild skalieren
