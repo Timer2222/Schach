@@ -1,7 +1,6 @@
 package src.klassen;
-
 import javax.swing.ImageIcon;
-import java.awt.Image;
+import java.awt.*;
 
 
 public class frei implements universell
@@ -23,5 +22,28 @@ public class frei implements universell
         Image image = icon.getImage(); // Bild als Image-Objekt erhalten
         Image scaledImage = image.getScaledInstance(70, 70, Image.SCALE_SMOOTH); // Bild skalieren
         return new ImageIcon(scaledImage);
+    }
+
+    // Hier nur Platzhalter, damit Code funktioniert
+    public Color giveColor()
+    {
+        return Color.PINK;
+    }
+
+    public boolean giveFirst()
+    {
+        return false;
+    }
+
+    public int[] ymoglichesFeld(int[] moglichkeiten, boolean first)
+    {
+        int[] platzhalter = new int[1]; 
+        return platzhalter;
+    }
+
+    public int[] xmoglichesFeld(int[] moglichkeiten, boolean first)
+    {
+        int[] platzhalter = new int[1]; 
+        return platzhalter;
     }
 }

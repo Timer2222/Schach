@@ -29,4 +29,27 @@ public class dame implements universell
         Image scaledImage = image.getScaledInstance(70, 70, Image.SCALE_SMOOTH); // Bild skalieren
         return new ImageIcon(scaledImage);
     }
+
+    // Hier nur Platzhalter, damit Code funktioniert
+    public Color giveColor()
+    {
+        return Color.PINK;
+    }
+
+    public boolean giveFirst()
+    {
+        return false;
+    }
+
+    public int[] ymoglichesFeld(int[] moglichkeiten, boolean first)
+    {
+        int[] platzhalter = new int[1]; 
+        return platzhalter;
+    }
+
+    public int[] xmoglichesFeld(int[] moglichkeiten, boolean first)
+    {
+        int[] platzhalter = new int[1]; 
+        return platzhalter;
+    }
 }
