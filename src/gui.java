@@ -16,6 +16,7 @@ public class gui extends JFrame implements ActionListener
     boolean schwarz = false;
     Color lightGreen, darkGreen;
     logik logik;
+    universell aktuelleFigur;
     public gui()
     {
         this.setSize(800,800);
@@ -142,6 +143,7 @@ public class gui extends JFrame implements ActionListener
                         }
                         else
                         {
+                            aktuelleFigur = figur;
                             if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.WHITE))
                             {
                                 graphFeld[x + xs[i]][y + ys[i]].setBackground(lightGreen);
@@ -152,7 +154,6 @@ public class gui extends JFrame implements ActionListener
                             }
                             graphFeld[x + xs[i]][y + ys[i]].setEnabled(true);
                         }
-                        
                     }
                 }
             }

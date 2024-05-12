@@ -17,110 +17,146 @@ public class bauer implements universell
         erstemal = first;
     }
 
-    public int[] xmoglichesFeld(int[] moglichkeiten, boolean first) 
+    public int[] schauer(universell[][] feld, int eigX, int eigY) // 2 = eigener oder aussen, 1 = gegner, 0 = frei
     {
-        int[] x = new int[4];
-        if(eigeneFarbe == Color.WHITE)
+        int[] moglichkeiten = new int[4];
+        universell tester;
+        if(eigeneFarbe.equals(Color.WHITE))
         {
-            if(moglichkeiten[0] == 1)
+            tester = feld[eigX - 1][eigY - 1];
+            if(tester.giveColor().equals(Color.BLACK))
             {
-                x[0] = -1;
+                moglichkeiten[0] = 1;
             }
-            else
+            tester = feld[eigX][eigY - 1];
+            if(tester.giveID().equals("frei"))
             {
-                x[0] = 187;
+                moglichkeiten[1] = 0;
             }
-            if(moglichkeiten[1] == 0)
+            tester = feld[eigX + 1][eigY - 1];
+            if(tester.giveColor().equals(Color.BLACK))
             {
-                x[1] = 0;
+                moglichkeiten[2] = 1;
             }
-            else
+            tester = feld[eigX][eigY - 2];
+            if(tester.giveID().equals("frei"))
             {
-                x[1] = 187;
-            }
-            if(moglichkeiten[2] == 1)
-            {
-                x[2] = 1;
-            }
-            else
-            {
-                x[2] = 187;
-            }
-            if(first == true)
-            {
-                x[3] = 0;
-            }
-            else
-            {
-                x[3] = 187;
+                moglichkeiten[3] = 0;
             }
         }
         else
         {
-            if(moglichkeiten[5] == 1)
+            tester = feld[eigX - 1][eigY + 1];
+            if(tester.giveColor().equals(Color.BLACK))
             {
-                x[0] = -1;
+                moglichkeiten[0] = 1;
             }
-            else
+            tester = feld[eigX][eigY + 1];
+            if(tester.giveID().equals("frei"))
             {
-                x[0] = 187;
+                moglichkeiten[1] = 0;
             }
-            if(moglichkeiten[6] == 0)
+            tester = feld[eigX + 1][eigY + 1];
+            if(tester.giveColor().equals(Color.BLACK))
             {
-                x[1] = 0;
+                moglichkeiten[2] = 1;
             }
-            else
+            tester = feld[eigX][eigY + 2];
+            if(tester.giveID().equals("frei"))
             {
-                x[1] = 187;
+                moglichkeiten[3] = 0;
             }
-            if(moglichkeiten[7] == 1)
-            {
-                x[2] = 1;
-            }
-            else
-            {
-                x[2] = 187;
-            }
-            if(first == true)
-            {
-                x[3] = 0;
-            }
-            else
-            {
-                x[3] = 187;
-            }
+        }
+        return moglichkeiten;
+    }
+
+    public int[] giveAngriffX()
+    {
+        int[] angriffe = new int[2];
+        angriffe[0] = -1;
+        angriffe[1] = 1;
+        return angriffe;
+    }
+
+    public int[] giveAngriffY()
+    {
+        int[] angriffe = new int[2];
+        angriffe[0] = -1;
+        angriffe[1] = -1;
+        return angriffe;
+    }
+
+    public int[] xmoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY) 
+    {
+        int[] x = new int[4];
+        int[] moglichkeit;
+        moglichkeit = schauer(feld, eigX, eigY);
+        // Hier ist die X-Richtung für beide Farbe dieselbe
+        if(moglichkeit[0] == 1) // wenn was nicht geht, wird der wert auf die eigene Position gestellt
+        {
+            x[0] = - 1;
+        }
+        else
+        {
+            x[0] = 0;
+        }
+        if(moglichkeit[1] == 0)
+        {
+            x[1] = 0;
+        }
+        else
+        {
+            x[1] = 0;
+        }
+        if(moglichkeit[2] == 1)
+        {
+            x[2] = 1;
+        }
+        else
+        {
+            x[2] = 0;
+        }
+        if(moglichkeit[3] == 0 && first == true)
+        {
+            x[3] = 0;
+        }
+        else
+        {
+            x[3] = 0;
         }
         return x;
     }
 
-    public int[] ymoglichesFeld(int[] moglichkeiten, boolean first) 
+    public int[] ymoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY) 
     {
         int[] y = new int[4];
+        int[] moglichkeit;
+        moglichkeit = schauer(feld, eigX, eigY);
         if(eigeneFarbe == Color.WHITE)
         {
-            if(moglichkeiten[0] == 1)
+            if(moglichkeit[0] == 1)
             {
                 y[0] = -1; // minus weil im Feld nach oben
             }
             else
             {
-                y[0] = 187;
+                y[0] = 0;
             }
-            if(moglichkeiten[1] == 0)
+            if(moglichkeit[1] == 0)
             {
                 y[1] = -1;
             }
             else
             {
-                y[1] = 187;
+                y[1] = 0;
             }
-            if(moglichkeiten[2] == 1)
+            if(moglichkeit[2] == 1)
             {
                 y[2] = -1;
             }
             else
             {
-                y[2] = 187;
+                y[2] = 0;
             }
             if(first == true)
             {
@@ -128,34 +164,34 @@ public class bauer implements universell
             }
             else
             {
-                y[3] = 187;
+                y[3] = 0;
             }
         }
         else
         {
-            if(moglichkeiten[5] == 1)
+            if(moglichkeit[5] == 1)
             {
                 y[0] = 1;
             }
             else
             {
-                y[0] = 187;
+                y[0] = 0;
             }
-            if(moglichkeiten[6] == 0)
+            if(moglichkeit[6] == 0)
             {
                 y[1] = 1;
             }
             else
             {
-                y[1] = 187;
+                y[1] = 0;
             }
-            if(moglichkeiten[7] == 1)
+            if(moglichkeit[7] == 1)
             {
                 y[2] = 1;
             }
             else
             {
-                y[2] = 187;
+                y[2] = 0;
             }
             if(first == true)
             {
@@ -163,7 +199,7 @@ public class bauer implements universell
             }
             else
             {
-                y[3] = 187;
+                y[3] = 0;
             }
         }
         return y;

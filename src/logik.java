@@ -5,9 +5,11 @@ import src.klassen.*;
 public class logik 
 {
     universell[][] logikFeld;
+    felderart art;
     public logik()
     {
         logikFeld = new universell[10][10];
+        art = new felderart(logikFeld);
         initialisieren();
     }
 
@@ -62,7 +64,6 @@ public class logik
         if(figur.giveID().equals("bauer"))
         {
             freieFelder = new int[187];
-
             for(int y = -1; y < 2; y++)
             {
                 for(int x = -1; x < 2; x++)
@@ -111,11 +112,11 @@ public class logik
 
     public int[] getX(universell figur, int eigx, int eigy)
     {
-        return figur.xmoglichesFeld(schauer(figur,eigx,eigy),figur.giveFirst());
+        return figur.xmoglichesFeld(figur.giveFirst(), logikFeld, eigx, eigy);
     }
 
     public int[] getY(universell figur, int eigx, int eigy)
     {
-        return figur.ymoglichesFeld(schauer(figur,eigx,eigy),figur.giveFirst());
+        return figur.ymoglichesFeld(figur.giveFirst(), logikFeld, eigx, eigy);
     }
 }

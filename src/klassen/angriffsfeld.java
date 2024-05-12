@@ -4,10 +4,13 @@ import javax.swing.ImageIcon;
 
 public class angriffsfeld implements universell
 {
-    public angriffsfeld()
+    public universell angreifer;
+    public angriffsfeld(universell abstammung)
     {
-
+        angreifer = abstammung;
     }
+
+
 
     public String giveID()
     {
@@ -41,6 +44,18 @@ public class angriffsfeld implements universell
     }
 
     public int[] xmoglichesFeld(int[] moglichkeiten, boolean first)
+    {
+        int[] platzhalter = new int[1]; 
+        return platzhalter;
+    }
+
+    public int[] giveAngriffX()
+    {
+        int[] platzhalter = new int[1]; 
+        return platzhalter;
+    }
+
+    public int[] giveAngriffY()
     {
         int[] platzhalter = new int[1]; 
         return platzhalter;
