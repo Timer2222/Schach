@@ -35,15 +35,38 @@ public class frei implements universell
         return false;
     }
 
-    public int[] ymoglichesFeld(int[] moglichkeiten, boolean first)
+    public int[] ymoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY)
     {
         int[] platzhalter = new int[1]; 
+        platzhalter[0] = 0; 
         return platzhalter;
     }
 
-    public int[] xmoglichesFeld(int[] moglichkeiten, boolean first)
+    public int[] xmoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY)
     {
         int[] platzhalter = new int[1]; 
+        platzhalter[0] = 0; 
+        return platzhalter;
+    }
+
+    public int[] schauer(universell[][] feld, int eigX, int eigY)
+    {
+        int[] platzhalter = new int[1];
+        platzhalter[0] = 0; 
+        return platzhalter;
+    }
+
+    public int[] giveAngriffX()
+    {
+        int[] platzhalter = new int[1]; 
+        platzhalter[0] = 0; 
+        return platzhalter;
+    }
+
+    public int[] giveAngriffY()
+    {
+        int[] platzhalter = new int[1];
+        platzhalter[0] = 0; 
         return platzhalter;
     }
 }

@@ -32,12 +32,17 @@ public class felderart
                 {
                     angX = figur.giveAngriffX();
                     angY = figur.giveAngriffY();
-                    for(int i = 0; i < 10; i++)
+                    for(int i = 0; i < angX.length; i++)
                     {
-                        if(angX[i] < 10 && angX[i] >= 0 && angY[i] < 10 && angY[i] >= 0)
+                        if(art[x + angX[i]][y + angY[i]].giveID().equals("aussen"))
                         {
-                            art[angX[i]][angY[i]] = new angriffsfeld(figur);
+
                         }
+                        else
+                        {
+                            art[x + angX[i]][y + angY[i]] = new angriffsfeld(figur);
+                        }
+                        
                     }
                 }
             }

@@ -9,8 +9,8 @@ public class logik
     public logik()
     {
         logikFeld = new universell[10][10];
-        art = new felderart(logikFeld);
         initialisieren();
+        art = new felderart(logikFeld);
     }
 
     public void initialisieren()
@@ -112,11 +112,11 @@ public class logik
 
     public int[] getX(universell figur, int eigx, int eigy)
     {
-        return figur.xmoglichesFeld(figur.giveFirst(), logikFeld, eigx, eigy);
+        return figur.xmoglichesFeld(figur.giveFirst(), logikFeld, art.art, eigx, eigy);
     }
 
     public int[] getY(universell figur, int eigx, int eigy)
     {
-        return figur.ymoglichesFeld(figur.giveFirst(), logikFeld, eigx, eigy);
+        return figur.ymoglichesFeld(figur.giveFirst(), logikFeld, art.art, eigx, eigy);
     }
 }

@@ -12,9 +12,10 @@ public interface universell //brauchen wir um alle klassen nutzen zu können
     public boolean giveFirst();
     public int[] giveAngriffX();
     public int[] giveAngriffY();
-    public int[] schauer(universell[][] feld, int eigX, int eigY);
-    public int[] ymoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY); // first nur für bauer
-    public int[] xmoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY); // first nur für bauer
+    public Color giveAbstammungColor();
+    public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY);
+    public int[] ymoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY); // first nur für bauer
+    public int[] xmoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY); // first nur für bauer
     
 }  
 

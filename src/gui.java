@@ -11,6 +11,7 @@ import java.awt.*;
 
 public class gui extends JFrame implements ActionListener
 {
+    boolean turn; //wenn true ist weiss dran, wenn false ist schwarz dran
     JButton[][] graphFeld;
     JButton starten;
     boolean schwarz = false;
@@ -22,6 +23,7 @@ public class gui extends JFrame implements ActionListener
         this.setSize(800,800);
         this.setLayout(null);
         this.setTitle("Schach von Anton Klonig und Tim Weber");
+        turn = true;
         graphFeld = new JButton[10][10];
         logik = new logik();
         lightGreen = new Color(115, 240, 135);
@@ -105,6 +107,28 @@ public class gui extends JFrame implements ActionListener
                 graphFeld[x][y].setIcon(bild);
             }
         }
+    }
+
+    public void neueEntscheidung() // falls man sich dch fur eine andere Figur entscheidet, werden alle enabled felder wieder disabled
+    {
+        for(int y = 1; y < 9; y++)
+        {
+            for(int x = 1; x < 9; x++)
+            {
+                if(turn == true && logik.logikFeld[x][y].giveColor().equals(Color.WHITE))
+                {
+                    graphFeld[x][y].setEnabled(true);
+                }
+                else if(turn == false && logik.logikFeld[x][y].giveColor().equals(Color.BLACK))
+                {
+                    graphFeld[x][y].setEnabled(true);
+                }
+                else
+                {
+                    graphFeld[x][y].setEnabled(false);
+                }
+            }
+        }
         
     }
 
@@ -131,6 +155,10 @@ public class gui extends JFrame implements ActionListener
             {
                 if(event.getSource() == graphFeld[x][y])
                 {
+                    if(!logik.logikFeld[x][y].giveID().equals("aussen") && !logik.logikFeld[x][y].giveID().equals("frei") && !logik.logikFeld[x][y].giveID().equals("angriff"))
+                    {
+                        neueEntscheidung();
+                    }
                     figur = logik.logikFeld[x][y];
                     int[] xs = logik.getX(figur, x, y);
                     int[] ys = logik.getY(figur, x, y);
@@ -144,11 +172,11 @@ public class gui extends JFrame implements ActionListener
                         else
                         {
                             aktuelleFigur = figur;
-                            if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.WHITE))
+                            if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.WHITE) && logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.PINK))
                             {
                                 graphFeld[x + xs[i]][y + ys[i]].setBackground(lightGreen);
                             }
-                            else
+                            else if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.GRAY) && logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.PINK))
                             {
                                 graphFeld[x + xs[i]][y + ys[i]].setBackground(darkGreen);
                             }

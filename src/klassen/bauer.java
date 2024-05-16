@@ -17,7 +17,13 @@ public class bauer implements universell
         erstemal = first;
     }
 
-    public int[] schauer(universell[][] feld, int eigX, int eigY) // 2 = eigener oder aussen, 1 = gegner, 0 = frei
+    
+    public Color giveAbstammungColor() 
+    {
+        return Color.PINK;
+    }
+
+    public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY) // 2 = eigener oder aussen, 1 = gegner, 0 = frei
     {
         int[] moglichkeiten = new int[4];
         universell tester;
@@ -86,11 +92,11 @@ public class bauer implements universell
         return angriffe;
     }
 
-    public int[] xmoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY) 
+    public int[] xmoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY) 
     {
         int[] x = new int[4];
         int[] moglichkeit;
-        moglichkeit = schauer(feld, eigX, eigY);
+        moglichkeit = schauer(feld, art, eigX, eigY);
         // Hier ist die X-Richtung für beide Farbe dieselbe
         if(moglichkeit[0] == 1) // wenn was nicht geht, wird der wert auf die eigene Position gestellt
         {
@@ -127,11 +133,11 @@ public class bauer implements universell
         return x;
     }
 
-    public int[] ymoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY) 
+    public int[] ymoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY) 
     {
         int[] y = new int[4];
         int[] moglichkeit;
-        moglichkeit = schauer(feld, eigX, eigY);
+        moglichkeit = schauer(feld, art, eigX, eigY);
         if(eigeneFarbe == Color.WHITE)
         {
             if(moglichkeit[0] == 1)
