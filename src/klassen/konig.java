@@ -172,15 +172,33 @@ public class konig implements universell
 
     public int[] giveAngriffX()
     {
-        int[] platzhalter = new int[1]; 
-        platzhalter[0] = 0; 
-        return platzhalter;
+        int[] angX = new int[8]; 
+        angX[0] = -1;
+        angX[1] = 0;
+        angX[2] = 1;
+        angX[3] = -1; 
+        angX[4] = 1;
+        angX[5] = -1;
+        angX[6] = 0;
+        angX[7] = -1;
+        return angX;
     }
 
     public int[] giveAngriffY()
     {
-        int[] platzhalter = new int[1];
-        platzhalter[0] = 0; 
-        return platzhalter;
+        int[] angY = new int[8];
+        for(int i = 0; i < 3; i++)
+        {
+            angY[i] = 1; 
+        }
+        for(int i = 3; i < 5; i++)
+        {
+            angY[i] = 0; 
+        }
+        for(int i = 5; i < 8; i++)
+        {
+            angY[i] = -1; 
+        }
+        return angY;
     }
 }
