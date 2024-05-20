@@ -29,27 +29,33 @@ public class frei implements universell
     {
         return Color.PINK;
     }
+    
+    public Color giveAbstammungColor()
+    {
+        return Color.PINK;
+    }
 
     public boolean giveFirst()
     {
         return false;
     }
 
-    public int[] ymoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY)
+   
+    public int[] ymoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] platzhalter = new int[1]; 
         platzhalter[0] = 0; 
         return platzhalter;
     }
 
-    public int[] xmoglichesFeld(boolean first, universell[][] feld, int eigX, int eigY)
+    public int[] xmoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] platzhalter = new int[1]; 
         platzhalter[0] = 0; 
         return platzhalter;
     }
 
-    public int[] schauer(universell[][] feld, int eigX, int eigY)
+    public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] platzhalter = new int[1];
         platzhalter[0] = 0; 

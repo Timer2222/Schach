@@ -128,9 +128,82 @@ public class turm implements universell
 
     public int[] xmoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] platzhalter = new int[1]; 
-        platzhalter[0] = 0; 
-        return platzhalter;
+        int[] x = new int[14];
+        int[] moglichkeit = schauer(feld, art, eigX, eigY);
+        int zaehler = 1; // dafur da, um die 4 Seiten abzudecken
+        int hochzaehler = -1;
+        for(int i = 0; i < moglichkeit.length; i++)
+        {
+            if(zaehler == 1) // alles links vom Turm
+            {
+                if(moglichkeit[i] == 0)
+                {
+                    x[i] = hochzaehler;
+                    hochzaehler--;
+                }
+                else if(moglichkeit[i] == 1)
+                {
+                    x[i] = hochzaehler;
+                    hochzaehler = 1;
+                    zaehler = 2;
+                }
+                else 
+                {
+                    zaehler = 2;
+                    hochzaehler = 1;
+                }
+            }
+            else if(zaehler == 2) // alles uber dem Turm
+            {
+                if(moglichkeit[i] == 0)
+                {
+                    x[i] = 0;
+                }
+                else if(moglichkeit[i] == 1)
+                {
+                    x[i] = 0;
+                    zaehler = 3;
+                }
+                else 
+                {
+                    zaehler = 3;
+                }
+            }
+            else if(zaehler == 3) // alles rechts vom Turm
+            {
+                if(moglichkeit[i] == 0)
+                {
+                    x[i] = hochzaehler;
+                    hochzaehler++;
+                }
+                else if(moglichkeit[i] == 1)
+                {
+                    x[i] = hochzaehler;
+                    zaehler = 4;
+                }
+                else 
+                {
+                    zaehler = 4;
+                }
+            }
+            else if(zaehler == 4) // alles unter dem Turm
+            {
+                if(moglichkeit[i] == 0)
+                {
+                    x[i] = 0;
+                }
+                else if(moglichkeit[i] == 1)
+                {
+                    x[i] = 0;
+                    i = 14; // raus aus der For-Schleife
+                }
+                else 
+                {
+                    i = 14; // raus aus der For-Schleife
+                }
+            }
+        }
+        return x;
     }
 
     public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY)
@@ -292,15 +365,53 @@ public class turm implements universell
 
     public int[] giveAngriffX()
     {
-        int[] platzhalter = new int[1]; 
-        platzhalter[0] = 0; 
-        return platzhalter;
+        int[] angX = new int[28]; // alle Seiten maximal, in Logik wir dann gestoppt mithilfe der "aussen"-Felder
+        int zaehler = -1;
+        for(int i = 0; i < 7; i++) // links
+        {
+            angX[i] = zaehler;
+            zaehler--;
+        }
+        for(int i = 7; i < 14; i++) // oben
+        {
+            angX[i] = 0;
+        }
+        zaehler = 1;
+        for(int i = 14; i < 21; i++) // rechts
+        {
+            angX[i] = zaehler;
+            zaehler++;
+        }
+        for(int i = 21; i < 28; i++) // unten
+        {
+            angX[i] = 0;
+        }
+        return angX;
     }
 
     public int[] giveAngriffY()
     {
-        int[] platzhalter = new int[1];
-        platzhalter[0] = 0; 
-        return platzhalter;
+        int[] angY = new int[28]; // alle Seiten maximal, in Logik wir dann gestoppt mithilfe der "aussen"-Felder
+        int zaehler = 1;
+        for(int i = 0; i < 7; i++) // links
+        {
+            angY[i] = 0;
+        }
+        for(int i = 7; i < 14; i++) // oben
+        {
+            angY[i] = zaehler;
+            zaehler++;
+        }
+        for(int i = 14; i < 21; i++) // rechts
+        {
+            angY[i] = 0;
+        }
+        zaehler = -1;
+        for(int i = 21; i < 28; i++) // unten
+        {
+            angY[i] = zaehler;
+            zaehler--;
+        }
+        return angY;
     }
 }
