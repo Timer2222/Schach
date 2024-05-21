@@ -34,7 +34,11 @@ public class felderart
                     angY = figur.giveAngriffY();
                     for(int i = 0; i < angX.length; i++)
                     {
-                        if(art[x + angX[i]][y + angY[i]].giveID().equals("aussen"))
+                        if(x + angX[i] < 0 || x + angX[i] > 9 || y + angY[i] < 0 || y + angY[i] > 9)
+                        {
+
+                        }
+                        else if(test[x + angX[i]][y + angY[i]].giveID().equals("aussen"))
                         {
 
                         }

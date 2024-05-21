@@ -140,7 +140,7 @@ public class springer implements universell
     public int schauerHilfe(universell[][] feld, int testX, int testY)
     {
         // alle moglichkeiten werden durchgegangen, damit es nich in "schauer" nicht so kompliziert ist
-        if(testX < 0 || testX > 10 || testY < 0 || testY > 10) // falls ausserhabl der "aussen" - Felder
+        if(testX < 0 || testX > 9 || testY < 0 || testY > 9) // falls ausserhabl der "aussen" - Felder
         {
             return 2;
         }
