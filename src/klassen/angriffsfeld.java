@@ -21,6 +21,10 @@ public class angriffsfeld implements universell
         return "angriff";
     }
 
+    public void setFirstfalse()
+    {
+    }
+
     public ImageIcon bild()
     {
         String pfad = "lib\\pic\\" + "nichts" + ".png";

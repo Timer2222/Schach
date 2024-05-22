@@ -1,11 +1,11 @@
 package src;
 import java.awt.Color;
-
 import src.klassen.*;
 public class logik 
 {
     universell[][] logikFeld;
     felderart art;
+    universell current;
     public logik()
     {
         logikFeld = new universell[10][10];
@@ -56,59 +56,6 @@ public class logik
         }
     }
 
-    public int[] schauer(universell figur, int eigx, int eigy) // muss figur-abhangig sein um für jede figur ihre individuellen Schritte mitzugeben
-    {
-        int[] freieFelder;
-        universell tester;
-        int zaehler = 0;
-        if(figur.giveID().equals("bauer"))
-        {
-            freieFelder = new int[187];
-            for(int y = -1; y < 2; y++)
-            {
-                for(int x = -1; x < 2; x++)
-                {
-                    tester = logikFeld[eigx + x][eigy + y];
-                    if(figur.giveColor().equals(Color.WHITE)) // 2 Cases, da verschiedene Farben
-                    {
-                        if(tester.giveColor().equals(Color.BLACK))
-                        {
-                            freieFelder[zaehler] = 1;
-                        }
-                        else if(tester.giveColor().equals(Color.WHITE) || tester.giveID().equals("aussen"))
-                        {
-                            freieFelder[zaehler] = 2;
-                        }
-                        else
-                        {
-                            freieFelder[zaehler] = 0;
-                        }
-                    }
-                    else
-                    {
-                        if(tester.giveColor().equals(Color.WHITE))
-                        {
-                            freieFelder[zaehler] = 1;
-                        }
-                        else if(tester.giveColor().equals(Color.BLACK) || tester.giveID().equals("aussen"))
-                        {
-                            freieFelder[zaehler] = 2;
-                        }
-                        else
-                        {
-                            freieFelder[zaehler] = 0;
-                        }
-                    }
-                    
-
-                    zaehler++;
-                }
-            }
-            return freieFelder;
-        }
-        int[] notfall = new int[1];
-        return notfall;
-    }
 
     public int[] getX(universell figur, int eigx, int eigy)
     {
@@ -118,5 +65,10 @@ public class logik
     public int[] getY(universell figur, int eigx, int eigy)
     {
         return figur.ymoglichesFeld(figur.giveFirst(), logikFeld, art.art, eigx, eigy);
+    }
+
+    public void freisetzer(int x, int y)
+    {
+        logikFeld[x][y] = new frei();
     }
 }

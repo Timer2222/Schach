@@ -21,6 +21,10 @@ public class dame implements universell
         return name;
     }
 
+    public void setFirstfalse()
+    {
+    }
+
     public ImageIcon bild()
     {
         String pfad = "lib\\pic\\" + eigeneFarbenLink + ".png";
@@ -618,7 +622,7 @@ public class dame implements universell
     public int[] giveAngriffY()
     {
         // wie Schauer
-        int[] angY = new int[28]; // alle Seiten maximal, in Logik wir dann gestoppt mithilfe der "aussen"-Felder
+        int[] angY = new int[56]; // alle Seiten maximal, in Logik wir dann gestoppt mithilfe der "aussen"-Felder
         int zaehler = 1;
         for(int i = 0; i < 7; i++) // links
         {

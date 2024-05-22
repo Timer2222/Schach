@@ -20,6 +20,10 @@ public class konig implements universell
         return name;
     }
 
+    public void setFirstfalse()
+    {
+    }
+
     public ImageIcon bild()
     {
         String pfad = "lib\\pic\\" + eigeneFarbenLink + ".png";

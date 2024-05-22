@@ -8,6 +8,7 @@ public interface universell //brauchen wir um alle klassen nutzen zu können
     public String giveID();
     public Color giveColor();
     public boolean giveFirst();
+    public void setFirstfalse(); // braucht nur der Bauer
     public int[] giveAngriffX();
     public int[] giveAngriffY();
     public Color giveAbstammungColor();

@@ -20,6 +20,10 @@ public class laufer implements universell
         return name;
     }
 
+    public void setFirstfalse()
+    {
+    }
+
     public ImageIcon bild()
     {
         String pfad = "lib\\pic\\" + eigeneFarbenLink + ".png";
@@ -251,19 +255,19 @@ public class laufer implements universell
             {
                 moglichkeiten[zaehler] = 1;
                 zaehler++;
-                i = -10;
+                i = 10;
             }
             else if(eigeneFarbe.equals(Color.BLACK) && feld[eigX - i][eigY - i].giveColor().equals(Color.WHITE))
             {
                 moglichkeiten[zaehler] = 1;
                 zaehler++;
-                i = -10;
+                i = 10;
             }
             else if(feld[eigX - i][eigY - i].giveID().equals("aussen"))
             {
                 moglichkeiten[zaehler] = 2;
                 zaehler++;
-                i = -10;
+                i = 10;
             }
         }
         for(int i = 1; i < 8; i++) // rechts oben
@@ -343,6 +347,10 @@ public class laufer implements universell
                 zaehler++;
                 i = 10;
             }
+        }
+        for(int i = zaehler; i < 13; i++)
+        {
+            moglichkeiten[i] = 2;
         }
         return moglichkeiten;
     }

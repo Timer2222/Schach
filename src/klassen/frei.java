@@ -15,6 +15,10 @@ public class frei implements universell
         return "frei";
     }
 
+    public void setFirstfalse()
+    {
+    }
+
     public ImageIcon bild()
     {
         String pfad = "lib\\pic\\" + "nichts" + ".png";

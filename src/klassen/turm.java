@@ -21,6 +21,10 @@ public class turm implements universell
         return name;
     }
 
+    public void setFirstfalse()
+    {
+    }
+
     public ImageIcon bild()
     {
         String pfad = "lib\\pic\\" + eigeneFarbenLink + ".png";
@@ -51,7 +55,7 @@ public class turm implements universell
         int[] y = new int[14];
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         int zaehler = 1; // dafur da, um die 4 Seiten abzudecken
-        int hochzaehler = 1;
+        int hochzaehler = -1;
         for(int i = 0; i < moglichkeit.length; i++)
         {
             if(zaehler == 1) // alles links vom Turm
@@ -75,18 +79,18 @@ public class turm implements universell
                 if(moglichkeit[i] == 0)
                 {
                     y[i] = hochzaehler;
-                    hochzaehler++;
+                    hochzaehler--;
                 }
                 else if(moglichkeit[i] == 1)
                 {
                     y[i] = hochzaehler;
-                    hochzaehler = -1;
+                    hochzaehler = 1;
                     zaehler = 3;
                 }
                 else 
                 {
                     zaehler = 3;
-                    hochzaehler = -1;
+                    hochzaehler = 1;
                 }
             }
             else if(zaehler == 3) // alles rechts vom Turm
@@ -110,7 +114,7 @@ public class turm implements universell
                 if(moglichkeit[i] == 0)
                 {
                     y[i] = hochzaehler;
-                    hochzaehler--;
+                    hochzaehler++;
                 }
                 else if(moglichkeit[i] == 1)
                 {
@@ -209,156 +213,158 @@ public class turm implements universell
     public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] moglichkeiten = new int[14];
-        for(int i = 0; i < 14; i++)
+        int i = 0;
+        for(int x = eigX - 1; x >= 0; x--) // alles vom Turm nach links
         {
-            for(int x = eigX - 1; x >= 0; x--) // alles vom Turm nach links
+            if(eigeneFarbe.equals(Color.WHITE))
             {
-                if(eigeneFarbe.equals(Color.WHITE))
+                if(feld[x][eigY].giveColor().equals(Color.BLACK))
                 {
-                    if(feld[eigY][x].giveColor().equals(Color.BLACK))
-                    {
-                        moglichkeiten[i] = 1;
-                        x = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else if(feld[eigY][x].giveColor().equals(Color.WHITE) || feld[eigY][x].giveID().equals("aussen"))
-                    {
-                        moglichkeiten[i] = 2;
-                        x = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else
-                    {
-                        moglichkeiten[i] = 0;
-                    }
+                    moglichkeiten[i] = 1;
+                    x = -2; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else if(feld[x][eigY].giveColor().equals(Color.WHITE) || feld[x][eigY].giveID().equals("aussen"))
+                {
+                    moglichkeiten[i] = 2;
+                    x = -2; // brauche ich, um aus der For-Schleife rauszukommen
                 }
                 else
                 {
-                    if(feld[eigY][x].giveColor().equals(Color.WHITE))
-                    {
-                        moglichkeiten[i] = 1;
-                        x = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else if(feld[eigY][x].giveColor().equals(Color.BLACK) || feld[eigY][x].giveID().equals("aussen"))
-                    {
-                        moglichkeiten[i] = 2;
-                        x = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else
-                    {
-                        moglichkeiten[i] = 0;
-                    }
+                    moglichkeiten[i] = 0;
                 }
             }
-            for(int y = eigY - 1; y >= 0; y--) // alles uber dem Turm
+            else
             {
-                if(eigeneFarbe.equals(Color.WHITE))
+                if(feld[x][eigY].giveColor().equals(Color.WHITE))
                 {
-                    if(feld[y][eigX].giveColor().equals(Color.BLACK))
-                    {
-                        moglichkeiten[i] = 1;
-                        y = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else if(feld[y][eigX].giveColor().equals(Color.WHITE) || feld[y][eigX].giveID().equals("aussen"))
-                    {
-                        moglichkeiten[i] = 2;
-                        y = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else
-                    {
-                        moglichkeiten[i] = 0;
-                    }
+                    moglichkeiten[i] = 1;
+                    x = -2; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else if(feld[x][eigY].giveColor().equals(Color.BLACK) || feld[x][eigY].giveID().equals("aussen"))
+                {
+                    moglichkeiten[i] = 2;
+                    x = -2; // brauche ich, um aus der For-Schleife rauszukommen
                 }
                 else
                 {
-                    if(feld[y][eigX].giveColor().equals(Color.WHITE))
-                    {
-                        moglichkeiten[i] = 1;
-                        y = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else if(feld[y][eigX].giveColor().equals(Color.BLACK) || feld[y][eigX].giveID().equals("aussen"))
-                    {
-                        moglichkeiten[i] = 2;
-                        y = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else
-                    {
-                        moglichkeiten[i] = 0;
-                    }
+                    moglichkeiten[i] = 0;
                 }
             }
-            for(int x = eigX + 1; x <= 9; x++) // alles rechts vom Turm
+            i++;
+        }
+        for(int y = eigY - 1; y >= 0; y--) // alles uber dem Turm
+        {
+            if(eigeneFarbe.equals(Color.WHITE))
             {
-                if(eigeneFarbe.equals(Color.WHITE))
+                if(feld[eigX][y].giveColor().equals(Color.BLACK))
                 {
-                    if(feld[eigY][x].giveColor().equals(Color.BLACK))
-                    {
-                        moglichkeiten[i] = 1;
-                        x = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else if(feld[eigY][x].giveColor().equals(Color.WHITE) || feld[eigY][x].giveID().equals("aussen"))
-                    {
-                        moglichkeiten[i] = 2;
-                        x = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else
-                    {
-                        moglichkeiten[i] = 0;
-                    }
+                    moglichkeiten[i] = 1;
+                    y = -2; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else if(feld[eigX][y].giveColor().equals(Color.WHITE) || feld[eigX][y].giveID().equals("aussen"))
+                {
+                    moglichkeiten[i] = 2;
+                    y = -2; // brauche ich, um aus der For-Schleife rauszukommen
                 }
                 else
                 {
-                    if(feld[eigY][x].giveColor().equals(Color.WHITE))
-                    {
-                        moglichkeiten[i] = 1;
-                        x = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else if(feld[eigY][x].giveColor().equals(Color.BLACK) || feld[eigY][x].giveID().equals("aussen"))
-                    {
-                        moglichkeiten[i] = 2;
-                        x = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else
-                    {
-                        moglichkeiten[i] = 0;
-                    }
+                    moglichkeiten[i] = 0;
                 }
             }
-            for(int y = eigY + 1; y <= 9; y++) // alles unter dem Turm
+            else
             {
-                if(eigeneFarbe.equals(Color.WHITE))
+                if(feld[eigX][y].giveColor().equals(Color.WHITE))
                 {
-                    if(feld[y][eigX].giveColor().equals(Color.BLACK))
-                    {
-                        moglichkeiten[i] = 1;
-                        y = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else if(feld[y][eigX].giveColor().equals(Color.WHITE) || feld[y][eigX].giveID().equals("aussen"))
-                    {
-                        moglichkeiten[i] = 2;
-                        y = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else
-                    {
-                        moglichkeiten[i] = 0;
-                    }
+                    moglichkeiten[i] = 1;
+                    y = -2; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else if(feld[eigX][y].giveColor().equals(Color.BLACK) || feld[eigX][y].giveID().equals("aussen"))
+                {
+                    moglichkeiten[i] = 2;
+                    y = -2; // brauche ich, um aus der For-Schleife rauszukommen
                 }
                 else
                 {
-                    if(feld[y][eigX].giveColor().equals(Color.WHITE))
-                    {
-                        moglichkeiten[i] = 1;
-                        y = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else if(feld[y][eigX].giveColor().equals(Color.BLACK) || feld[y][eigX].giveID().equals("aussen"))
-                    {
-                        moglichkeiten[i] = 2;
-                        y = -2; // brauche ich, um aus der For-Schleife rauszukommen
-                    }
-                    else
-                    {
-                        moglichkeiten[i] = 0;
-                    }
+                    moglichkeiten[i] = 0;
                 }
             }
+            i++;
+        }
+        for(int x = eigX + 1; x <= 9; x++) // alles rechts vom Turm
+        {
+            if(eigeneFarbe.equals(Color.WHITE))
+            {
+                if(feld[x][eigY].giveColor().equals(Color.BLACK))
+                {
+                    moglichkeiten[i] = 1;
+                    x = 10; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else if(feld[x][eigY].giveColor().equals(Color.WHITE) || feld[x][eigY].giveID().equals("aussen"))
+                {
+                    moglichkeiten[i] = 2;
+                    x = 10; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else
+                {
+                moglichkeiten[i] = 0;
+                }
+            }
+            else
+            {
+                if(feld[x][eigY].giveColor().equals(Color.WHITE))
+                {
+                    moglichkeiten[i] = 1;
+                    x = 10; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else if(feld[x][eigY].giveColor().equals(Color.BLACK) || feld[x][eigY].giveID().equals("aussen"))
+                {
+                    moglichkeiten[i] = 2;
+                    x = 10; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else
+                {
+                    moglichkeiten[i] = 0;
+                }
+            }
+            i++;
+        }
+        for(int y = eigY + 1; y <= 9; y++) // alles unter dem Turm
+        {
+            if(eigeneFarbe.equals(Color.WHITE))
+            {
+                if(feld[eigX][y].giveColor().equals(Color.BLACK))
+                {
+                    moglichkeiten[i] = 1;
+                    y = 10; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else if(feld[eigX][y].giveColor().equals(Color.WHITE) || feld[eigX][y].giveID().equals("aussen"))
+                {
+                    moglichkeiten[i] = 2;
+                    y = 10; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else
+                {
+                    moglichkeiten[i] = 0;
+                }
+            }
+            else
+            {
+                if(feld[eigX][y].giveColor().equals(Color.WHITE))
+                {
+                    moglichkeiten[i] = 1;
+                    y = 10; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else if(feld[eigX][y].giveColor().equals(Color.BLACK) || feld[eigX][y].giveID().equals("aussen"))
+                {
+                    moglichkeiten[i] = 2;
+                    y = 10; // brauche ich, um aus der For-Schleife rauszukommen
+                }
+                else
+                {
+                    moglichkeiten[i] = 0;
+                }
+            }
+            i++;
         }
         return moglichkeiten;
     }

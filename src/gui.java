@@ -18,6 +18,7 @@ public class gui extends JFrame implements ActionListener
     Color lightGreen, darkGreen;
     logik logik;
     universell aktuelleFigur;
+    int currentX, currentY;
     public gui()
     {
         this.setSize(800,800);
@@ -95,6 +96,30 @@ public class gui extends JFrame implements ActionListener
         }
     }
 
+    public void aktualisieren()
+    {
+        for(int y = 1; y < 9; y++)
+        {
+            for(int x = 1; x < 9; x++)
+            {
+                if(turn == true)
+                {
+                    if(logik.logikFeld[x][y].giveColor().equals(Color.BLACK) || logik.logikFeld[x][y].giveID().equals("frei"))
+                    {
+                        graphFeld[x][y].setEnabled(false);
+                    }
+                }
+                else
+                {
+                    if(logik.logikFeld[x][y].giveColor().equals(Color.WHITE) || logik.logikFeld[x][y].giveID().equals("frei"))
+                    {
+                        graphFeld[x][y].setEnabled(false);
+                    }
+                }
+            }
+        }
+    }
+
     public void figurenEinfugen()
     {
         universell figur;
@@ -155,23 +180,18 @@ public class gui extends JFrame implements ActionListener
             {
                 if(event.getSource() == graphFeld[x][y])
                 {
-                    if(!logik.logikFeld[x][y].giveID().equals("aussen") && !logik.logikFeld[x][y].giveID().equals("frei") && !logik.logikFeld[x][y].giveID().equals("angriff"))
+                    figur = logik.logikFeld[x][y];
+                    if(!logik.logikFeld[x][y].giveID().equals("aussen") && !logik.logikFeld[x][y].giveID().equals("frei"))
                     {
                         neueEntscheidung();
-                    }
-                    figur = logik.logikFeld[x][y];
-                    int[] xs = logik.getX(figur, x, y);
-                    int[] ys = logik.getY(figur, x, y);
+                        int[] xs = logik.getX(figur, x, y);
+                        int[] ys = logik.getY(figur, x, y);
+                        aktuelleFigur = figur;
+                        currentX = x;
+                        currentY = y;
 
-                    for(int i = 0; i < logik.getY(figur, x, y).length && i < logik.getX(figur, x, y).length; i++)
-                    {
-                        if(xs[i] == 187 || ys[i] == 187)
+                        for(int i = 0; i < xs.length; i++)
                         {
-
-                        }
-                        else
-                        {
-                            aktuelleFigur = figur;
                             if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.WHITE) && logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.PINK))
                             {
                                 graphFeld[x + xs[i]][y + ys[i]].setBackground(lightGreen);
@@ -182,6 +202,20 @@ public class gui extends JFrame implements ActionListener
                             }
                             graphFeld[x + xs[i]][y + ys[i]].setEnabled(true);
                         }
+                    }
+                    else
+                    {
+                        if(aktuelleFigur.giveID().equals("bauer"))
+                        {
+                            aktuelleFigur.setFirstfalse();
+                        }
+                        logik.logikFeld[x][y] = aktuelleFigur;
+                        ImageIcon bild = logik.logikFeld[x][y].bild();
+                        graphFeld[x][y].setIcon(bild);
+                        logik.freisetzer(currentX, currentY);
+                        ImageIcon frei = logik.logikFeld[currentX][currentY].bild();
+                        graphFeld[currentX][currentY].setIcon(frei);
+                        aktualisieren();
                     }
                 }
             }

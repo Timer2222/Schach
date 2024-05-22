@@ -39,6 +39,10 @@ public class aussen implements universell
         return false;
     }
 
+    public void setFirstfalse()
+    {
+    }
+
     public int[] ymoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] platzhalter = new int[1]; 

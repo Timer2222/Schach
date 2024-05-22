@@ -23,9 +23,10 @@ public class bauer implements universell
         return Color.PINK;
     }
 
+
     public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY) // 2 = eigener oder aussen, 1 = gegner, 0 = frei
     {
-        int[] moglichkeiten = new int[4];
+        int[] moglichkeiten = new int[8];
         universell tester;
         if(eigeneFarbe.equals(Color.WHITE))
         {
@@ -39,15 +40,24 @@ public class bauer implements universell
             {
                 moglichkeiten[1] = 0;
             }
+            else if(tester.giveColor().equals(Color.BLACK))
+            {
+                moglichkeiten[1] = 1;
+                moglichkeiten[3] = 1;
+            }
             tester = feld[eigX + 1][eigY - 1];
             if(tester.giveColor().equals(Color.BLACK))
             {
                 moglichkeiten[2] = 1;
             }
             tester = feld[eigX][eigY - 2];
-            if(tester.giveID().equals("frei"))
+            if(tester.giveID().equals("frei") && moglichkeiten[1] == 0)
             {
                 moglichkeiten[3] = 0;
+            }
+            else if(tester.giveColor().equals(Color.BLACK))
+            {
+                moglichkeiten[3] = 1;
             }
         }
         else
@@ -55,22 +65,31 @@ public class bauer implements universell
             tester = feld[eigX - 1][eigY + 1];
             if(tester.giveColor().equals(Color.BLACK))
             {
-                moglichkeiten[0] = 1;
+                moglichkeiten[4] = 1;
             }
             tester = feld[eigX][eigY + 1];
             if(tester.giveID().equals("frei"))
             {
-                moglichkeiten[1] = 0;
+                moglichkeiten[5] = 0;
+            }
+            else if(tester.giveColor().equals(Color.WHITE))
+            {
+                moglichkeiten[5] = 1;
+                moglichkeiten[7] = 1;
             }
             tester = feld[eigX + 1][eigY + 1];
             if(tester.giveColor().equals(Color.BLACK))
             {
-                moglichkeiten[2] = 1;
+                moglichkeiten[6] = 1;
             }
             tester = feld[eigX][eigY + 2];
-            if(tester.giveID().equals("frei"))
+            if(tester.giveID().equals("frei") && moglichkeiten[5] == 0)
             {
-                moglichkeiten[3] = 0;
+                moglichkeiten[7] = 0;
+            }
+            else if(tester.giveColor().equals(Color.WHITE))
+            {
+                moglichkeiten[7] = 1;
             }
         }
         return moglichkeiten;
@@ -100,7 +119,7 @@ public class bauer implements universell
         // Hier ist die X-Richtung für beide Farbe dieselbe
         if(moglichkeit[0] == 1) // wenn was nicht geht, wird der wert auf die eigene Position gestellt
         {
-            x[0] = - 1;
+            x[0] = -1;
         }
         else
         {
@@ -164,7 +183,7 @@ public class bauer implements universell
             {
                 y[2] = 0;
             }
-            if(first == true)
+            if(first == true && moglichkeit[3] == 0)
             {
                 y[3] = -2;
             }
@@ -199,7 +218,7 @@ public class bauer implements universell
             {
                 y[2] = 0;
             }
-            if(first == true)
+            if(first == true && moglichkeit[7] == 0)
             {
                 y[3] = 2;
             }
@@ -219,6 +238,11 @@ public class bauer implements universell
     public boolean giveFirst()
     {
         return erstemal;
+    }
+
+    public void setFirstfalse()
+    {
+        erstemal = false;
     }
 
     public Color giveColor()
