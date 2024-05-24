@@ -103,6 +103,7 @@ public class gui extends JFrame implements ActionListener
 
     public void nachsteRunde()
     {
+        logik.art.art = logik.art.aktualisieren(turn);
         for(int y = 1; y < 9; y++)
         {
             for(int x = 1; x < 9; x++)
@@ -193,13 +194,7 @@ public class gui extends JFrame implements ActionListener
         if(event.getSource() == starten)
         {
             starten.setVisible(false);
-            for(int y = 7; y < 10; y++)
-            {
-                for(int x = 1; x < 10; x++)
-                {
-                    graphFeld[x][y].setEnabled(true);
-                }
-            }
+            nachsteRunde();
         }
 
         for(int y = 1; y < 9; y++)

@@ -1,19 +1,18 @@
 package src;
+import java.awt.Color;
+
 import src.klassen.*;
 public class felderart 
 {
-    universell art[][], test[][];
+    universell art[][], logikfeld[][];
     public felderart(universell[][] feld)
     {
         art = new universell[10][10];
-        test = feld;
-        aktualisieren();
+        logikfeld = feld;
     }
 
-    public void aktualisieren()
+    public void initialisieren()
     {
-        universell figur;
-        int[] angX, angY;
         for(int y = 0; y < 10; y++)
         {
             for(int x = 0; x < 10; x++)
@@ -21,35 +20,71 @@ public class felderart
                 art[x][y] = new frei();
                 for(int i = 0; i < 10; i++)
                 {
-                    test[0][i] = new aussen();
-                    test[9][i] = new aussen();
-                    test[i][0] = new aussen();
-                    test[i][9] = new aussen();
-                }
+                    logikfeld[0][i] = new aussen();
+                    logikfeld[9][i] = new aussen();
+                    logikfeld[i][0] = new aussen();
+                    logikfeld[i][9] = new aussen();
+                }      
+            }
+        }
+    }
 
-                figur = test[x][y];
-                if(!figur.giveID().equals("angriff") && !figur.giveID().equals("aussen") && !figur.giveID().equals("frei"))
+    public universell[][] aktualisieren(boolean turn)
+    {
+        universell figur;
+        int[] angX, angY;
+        for(int y = 0; y < 10; y++)
+        {
+            for(int x = 0; x < 10; x++)
+            {
+                figur = logikfeld[x][y];
+                if(!figur.giveID().equals("angriff") && !figur.giveID().equals("aussen") && !figur.giveID().equals("frei") && !figur.giveID().equals("unsichtbar"))
                 {
-                    angX = figur.giveAngriffX();
-                    angY = figur.giveAngriffY();
-                    for(int i = 0; i < angX.length; i++)
+                    if(turn == true && figur.giveColor().equals(Color.BLACK)) // wenn weiss dran, braucht man die schwarzen Angriffsfelder
                     {
-                        if(x + angX[i] < 0 || x + angX[i] > 9 || y + angY[i] < 0 || y + angY[i] > 9)
+                        angX = figur.giveAngriffX();
+                        angY = figur.giveAngriffY();
+                        for(int i = 0; i < angX.length; i++)
                         {
+                            if(x + angX[i] < 0 || x + angX[i] > 9 || y + angY[i] < 0 || y + angY[i] > 9)
+                            {
 
-                        }
-                        else if(test[x + angX[i]][y + angY[i]].giveID().equals("aussen"))
-                        {
+                            }
+                            else if(logikfeld[x + angX[i]][y + angY[i]].giveID().equals("aussen"))
+                            {
 
-                        }
-                        else
-                        {
-                            art[x + angX[i]][y + angY[i]] = new angriffsfeld(figur);
-                        }
+                            }
+                            else
+                            {
+                                art[x + angX[i]][y + angY[i]] = new angriffsfeld(figur);
+                            }
                         
+                        }
+                    }
+                    else if(turn == false && figur.giveColor().equals(Color.WHITE))
+                    {
+                        angX = figur.giveAngriffX();
+                        angY = figur.giveAngriffY();
+                        for(int i = 0; i < angX.length; i++)
+                        {
+                            if(x + angX[i] < 0 || x + angX[i] > 9 || y + angY[i] < 0 || y + angY[i] > 9)
+                            {
+
+                            }
+                            else if(logikfeld[x + angX[i]][y + angY[i]].giveID().equals("aussen"))
+                            {
+
+                            }
+                            else
+                            {
+                                art[x + angX[i]][y + angY[i]] = new angriffsfeld(figur);
+                            }
+                        
+                        }
                     }
                 }
             }
         }
+        return art;
     }
 }
