@@ -7,13 +7,14 @@ public class turm implements universell
     public Color eigeneFarbe;
     public String eigeneFarbenLink, name;
     public int eigenePos;
-
+    public boolean first;
 
     public turm(Color farbeColor, String farbeString, String id)
     {
         name = id;
         eigeneFarbe = farbeColor;
         eigeneFarbenLink = farbeString;
+        first = true;
     }
 
     public String giveID()
@@ -23,6 +24,7 @@ public class turm implements universell
 
     public void setFirstfalse()
     {
+        first = false;
     }
 
     public ImageIcon bild()
@@ -42,7 +44,7 @@ public class turm implements universell
 
     public boolean giveFirst()
     {
-        return false;
+        return first;
     }
     
     public Color giveAbstammungColor()

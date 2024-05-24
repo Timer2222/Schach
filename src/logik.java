@@ -67,6 +67,8 @@ public class logik
         return figur.ymoglichesFeld(figur.giveFirst(), logikFeld, art.art, eigx, eigy);
     }
 
+
+
     public void freisetzer(int x, int y)
     {
         logikFeld[x][y] = new frei();

@@ -1,5 +1,8 @@
 package src;
 import javax.swing.*;
+
+import src.klassen.frei;
+import src.klassen.turm;
 // import src.klassen.bauer;
 import src.klassen.universell;
 
@@ -15,7 +18,7 @@ public class gui extends JFrame implements ActionListener
     JButton[][] graphFeld;
     JButton starten;
     boolean schwarz = false;
-    Color lightGreen, darkGreen;
+    Color lightGreen, darkGreen, red;
     logik logik;
     universell aktuelleFigur;
     int currentX, currentY;
@@ -29,6 +32,7 @@ public class gui extends JFrame implements ActionListener
         logik = new logik();
         lightGreen = new Color(115, 240, 135);
         darkGreen = new Color(5, 105, 20);
+        red = new Color(200,30,30);
         initialisieren();
         figurenEinfugen();
     }
@@ -96,7 +100,7 @@ public class gui extends JFrame implements ActionListener
         }
     }
 
-    public void aktualisieren()
+    public void nachsteRunde()
     {
         for(int y = 1; y < 9; y++)
         {
@@ -104,14 +108,22 @@ public class gui extends JFrame implements ActionListener
             {
                 if(turn == true)
                 {
-                    if(logik.logikFeld[x][y].giveColor().equals(Color.BLACK) || logik.logikFeld[x][y].giveID().equals("frei"))
+                    if(logik.logikFeld[x][y].giveColor().equals(Color.WHITE))
+                    {
+                        graphFeld[x][y].setEnabled(true);
+                    }
+                    else
                     {
                         graphFeld[x][y].setEnabled(false);
                     }
                 }
                 else
                 {
-                    if(logik.logikFeld[x][y].giveColor().equals(Color.WHITE) || logik.logikFeld[x][y].giveID().equals("frei"))
+                    if(logik.logikFeld[x][y].giveColor().equals(Color.BLACK))
+                    {
+                        graphFeld[x][y].setEnabled(true);
+                    }
+                    else
                     {
                         graphFeld[x][y].setEnabled(false);
                     }
@@ -183,42 +195,132 @@ public class gui extends JFrame implements ActionListener
                     figur = logik.logikFeld[x][y];
                     if(!logik.logikFeld[x][y].giveID().equals("aussen") && !logik.logikFeld[x][y].giveID().equals("frei"))
                     {
-                        neueEntscheidung();
-                        int[] xs = logik.getX(figur, x, y);
-                        int[] ys = logik.getY(figur, x, y);
-                        aktuelleFigur = figur;
-                        currentX = x;
-                        currentY = y;
-
-                        for(int i = 0; i < xs.length; i++)
+                        if(turn == true && figur.giveColor().equals(Color.WHITE))
                         {
-                            if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.WHITE) && logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.PINK))
-                            {
-                                graphFeld[x + xs[i]][y + ys[i]].setBackground(lightGreen);
-                            }
-                            else if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.GRAY) && logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.PINK))
-                            {
-                                graphFeld[x + xs[i]][y + ys[i]].setBackground(darkGreen);
-                            }
-                            graphFeld[x + xs[i]][y + ys[i]].setEnabled(true);
+                            neueEntscheidung();
+                            int[] xs = logik.getX(figur, x, y);
+                            int[] ys = logik.getY(figur, x, y);
+                            aktuelleFigur = figur;
+                            currentX = x;
+                            currentY = y;
+                            faerber(x, xs, y, ys);
+                        }
+                        else if(turn == false && figur.giveColor().equals(Color.BLACK))
+                        {
+                            neueEntscheidung();
+                            int[] xs = logik.getX(figur, x, y);
+                            int[] ys = logik.getY(figur, x, y);
+                            aktuelleFigur = figur;
+                            currentX = x;
+                            currentY = y;
+                            faerber(x, xs, y, ys);
+                        }
+                        else if((aktuelleFigur.giveColor().equals(Color.WHITE) && figur.giveColor().equals(Color.BLACK)) || (aktuelleFigur.giveColor().equals(Color.BLACK) && figur.giveColor().equals(Color.WHITE))) // hier wird angegriffen
+                        {
+                            aktuelleFigur.setFirstfalse();
+                            logik.logikFeld[x][y] = aktuelleFigur;
+                            ImageIcon bild = logik.logikFeld[x][y].bild();
+                            graphFeld[x][y].setIcon(bild);
+                            logik.freisetzer(currentX, currentY);
+                            ImageIcon frei = logik.logikFeld[currentX][currentY].bild();
+                            graphFeld[currentX][currentY].setIcon(frei);
+                            turn = !turn;
+                            nachsteRunde();
                         }
                     }
                     else
                     {
-                        if(aktuelleFigur.giveID().equals("bauer"))
-                        {
-                            aktuelleFigur.setFirstfalse();
-                        }
+                        aktuelleFigur.setFirstfalse();
                         logik.logikFeld[x][y] = aktuelleFigur;
                         ImageIcon bild = logik.logikFeld[x][y].bild();
                         graphFeld[x][y].setIcon(bild);
                         logik.freisetzer(currentX, currentY);
                         ImageIcon frei = logik.logikFeld[currentX][currentY].bild();
                         graphFeld[currentX][currentY].setIcon(frei);
-                        aktualisieren();
+                        if(checkForRochade(aktuelleFigur, x, currentX, y) == 1)
+                        {
+                            bild = logik.logikFeld[x - 1][y].bild();
+                            graphFeld[x - 1][y].setIcon(bild);
+                            logik.freisetzer(x + 1, y);
+                            frei = logik.logikFeld[x + 1][y].bild();
+                            graphFeld[x + 1][y].setIcon(frei);
+                        }
+                        else if(checkForRochade(aktuelleFigur, x, currentX, y) == 2)
+                        {
+                            bild = logik.logikFeld[x + 1][y].bild();
+                            graphFeld[x + 1][y].setIcon(bild);
+                            logik.freisetzer(x - 1, y);
+                            frei = logik.logikFeld[x - 2][y].bild();
+                            graphFeld[x - 2][y].setIcon(frei);
+                        }
+                        turn = !turn;
+                        nachsteRunde();
                     }
                 }
             }
+        }
+    }
+
+    public int checkForRochade(universell figur, int newX, int currentX, int y)
+    {
+        if(figur.giveID().equals("konig"))
+        {
+            String farbeString;
+            // kleine
+            if(newX == currentX + 2)
+            {
+                logik.logikFeld[newX + 1][y] = new frei();
+                if(figur.giveColor().equals(Color.WHITE))
+                {
+                    farbeString = "turmweiss";
+                }
+                else
+                {
+                    farbeString = "turmschwarz";
+                }
+                logik.logikFeld[newX - 1][y] = new turm(figur.giveColor(), farbeString, "turm");
+                return 1;
+            }
+            // grosse
+            else if(newX == currentX - 2)
+            {
+                logik.logikFeld[newX - 2][y] = new frei();
+                if(figur.giveColor().equals(Color.WHITE))
+                {
+                    farbeString = "turmweiss";
+                }
+                else
+                {
+                    farbeString = "turmschwarz";
+                }
+                logik.logikFeld[newX + 1][y] = new turm(figur.giveColor(), farbeString, "turm");
+                return 2;
+            }
+        }
+        return 0;
+    }
+
+    public void faerber(int x, int[] xs, int y, int[] ys)
+    {
+        for(int i = 0; i < xs.length; i++)
+        {
+            if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.WHITE) && logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.PINK))
+            {
+                graphFeld[x + xs[i]][y + ys[i]].setBackground(lightGreen);
+            }
+            else if(graphFeld[x + xs[i]][y + ys[i]].getBackground().equals(Color.GRAY) && logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.PINK))
+            {
+                graphFeld[x + xs[i]][y + ys[i]].setBackground(darkGreen);
+            }
+            else if(logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.BLACK) && turn == true)
+            {
+                graphFeld[x + xs[i]][y + ys[i]].setBackground(red);
+            }
+            else if(logik.logikFeld[x + xs[i]][y + ys[i]].giveColor().equals(Color.WHITE) && turn == false)
+            {
+                graphFeld[x + xs[i]][y + ys[i]].setBackground(red);
+            }
+            graphFeld[x + xs[i]][y + ys[i]].setEnabled(true);
         }
     }
 

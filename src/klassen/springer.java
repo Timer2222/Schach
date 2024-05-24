@@ -110,19 +110,19 @@ public class springer implements universell
     {
         if(i == 0 || i == 3)
         {
-            return 1;
+            return -1;
         }
         else if(i == 1 || i == 2)
         {
-            return 2;
+            return -2;
         }
         else if(i == 4 || i == 7)
         {
-            return -1;
+            return 1;
         }
         else if(i == 5 || i == 6)
         {
-            return -2;
+            return 2;
         }
         return 0;
     }
@@ -130,14 +130,14 @@ public class springer implements universell
     public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] moglichkeiten = new int[8];
-        moglichkeiten[0] = schauerHilfe(feld, eigX - 2, eigY + 1);
-        moglichkeiten[1] = schauerHilfe(feld, eigX - 1, eigY + 2);
-        moglichkeiten[2] = schauerHilfe(feld, eigX + 1, eigY + 2);
-        moglichkeiten[3] = schauerHilfe(feld, eigX + 2, eigY + 1);
-        moglichkeiten[4] = schauerHilfe(feld, eigX - 2, eigY - 1);
-        moglichkeiten[5] = schauerHilfe(feld, eigX - 1, eigY - 2);
-        moglichkeiten[6] = schauerHilfe(feld, eigX + 1, eigY - 2);
-        moglichkeiten[7] = schauerHilfe(feld, eigX + 2, eigY - 1);
+        moglichkeiten[0] = schauerHilfe(feld, eigX - 2, eigY - 1);
+        moglichkeiten[1] = schauerHilfe(feld, eigX - 1, eigY - 2);
+        moglichkeiten[2] = schauerHilfe(feld, eigX + 1, eigY - 2);
+        moglichkeiten[3] = schauerHilfe(feld, eigX + 2, eigY - 1);
+        moglichkeiten[4] = schauerHilfe(feld, eigX + 2, eigY + 1);
+        moglichkeiten[5] = schauerHilfe(feld, eigX + 1, eigY + 2);
+        moglichkeiten[6] = schauerHilfe(feld, eigX - 1, eigY + 2);
+        moglichkeiten[7] = schauerHilfe(feld, eigX - 2, eigY + 1);
         return moglichkeiten;
     }
 

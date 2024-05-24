@@ -269,6 +269,18 @@ public class laufer implements universell
                 zaehler++;
                 i = 10;
             }
+            else if(eigeneFarbe.equals(Color.WHITE) && feld[eigX - i][eigY - i].giveColor().equals(Color.WHITE))
+            {
+                moglichkeiten[zaehler] = 2;
+                zaehler++;
+                i = 10;
+            }
+            else if(eigeneFarbe.equals(Color.BLACK) && feld[eigX - i][eigY - i].giveColor().equals(Color.BLACK))
+            {
+                moglichkeiten[zaehler] = 2;
+                zaehler++;
+                i = 10;
+            }
         }
         for(int i = 1; i < 8; i++) // rechts oben
         {
@@ -290,6 +302,18 @@ public class laufer implements universell
                 i = 10;
             }
             else if(feld[eigX + i][eigY - i].giveID().equals("aussen"))
+            {
+                moglichkeiten[zaehler] = 2;
+                zaehler++;
+                i = 10;
+            }
+            else if(eigeneFarbe.equals(Color.WHITE) && feld[eigX + i][eigY - i].giveColor().equals(Color.WHITE))
+            {
+                moglichkeiten[zaehler] = 2;
+                zaehler++;
+                i = 10;
+            }
+            else if(eigeneFarbe.equals(Color.BLACK) && feld[eigX + i][eigY - i].giveColor().equals(Color.BLACK))
             {
                 moglichkeiten[zaehler] = 2;
                 zaehler++;
@@ -321,8 +345,20 @@ public class laufer implements universell
                 zaehler++;
                 i = 10;
             }
+            else if(eigeneFarbe.equals(Color.WHITE) && feld[eigX + i][eigY + i].giveColor().equals(Color.WHITE))
+            {
+                moglichkeiten[zaehler] = 2;
+                zaehler++;
+                i = 10;
+            }
+            else if(eigeneFarbe.equals(Color.BLACK) && feld[eigX + i][eigY + i].giveColor().equals(Color.BLACK))
+            {
+                moglichkeiten[zaehler] = 2;
+                zaehler++;
+                i = 10;
+            }
         }
-        for(int i = 0; i < 8; i++) // links unten
+        for(int i = 1; i < 8; i++) // links unten
         {
             if(feld[eigX - i][eigY + i].giveID().equals("frei"))
             {
@@ -342,6 +378,18 @@ public class laufer implements universell
                 i = 10;
             }
             else if(feld[eigX - i][eigY + i].giveID().equals("aussen"))
+            {
+                moglichkeiten[zaehler] = 2;
+                zaehler++;
+                i = 10;
+            }
+            else if(eigeneFarbe.equals(Color.WHITE) && feld[eigX - i][eigY + i].giveColor().equals(Color.WHITE))
+            {
+                moglichkeiten[zaehler] = 2;
+                zaehler++;
+                i = 10;
+            }
+            else if(eigeneFarbe.equals(Color.BLACK) && feld[eigX - i][eigY + i].giveColor().equals(Color.BLACK))
             {
                 moglichkeiten[zaehler] = 2;
                 zaehler++;

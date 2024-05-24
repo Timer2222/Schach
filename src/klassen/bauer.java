@@ -45,6 +45,11 @@ public class bauer implements universell
                 moglichkeiten[1] = 1;
                 moglichkeiten[3] = 1;
             }
+            else if(tester.giveColor().equals(Color.WHITE))
+            {
+                moglichkeiten[1] = 2;
+                moglichkeiten[3] = 2;
+            }
             tester = feld[eigX + 1][eigY - 1];
             if(tester.giveColor().equals(Color.BLACK))
             {
@@ -63,7 +68,7 @@ public class bauer implements universell
         else
         {
             tester = feld[eigX - 1][eigY + 1];
-            if(tester.giveColor().equals(Color.BLACK))
+            if(tester.giveColor().equals(Color.WHITE))
             {
                 moglichkeiten[4] = 1;
             }
@@ -77,8 +82,13 @@ public class bauer implements universell
                 moglichkeiten[5] = 1;
                 moglichkeiten[7] = 1;
             }
+            else if(tester.giveColor().equals(Color.BLACK))
+            {
+                moglichkeiten[5] = 2;
+                moglichkeiten[7] = 2;
+            }
             tester = feld[eigX + 1][eigY + 1];
-            if(tester.giveColor().equals(Color.BLACK))
+            if(tester.giveColor().equals(Color.WHITE))
             {
                 moglichkeiten[6] = 1;
             }
@@ -117,7 +127,7 @@ public class bauer implements universell
         int[] moglichkeit;
         moglichkeit = schauer(feld, art, eigX, eigY);
         // Hier ist die X-Richtung für beide Farbe dieselbe
-        if(moglichkeit[0] == 1) // wenn was nicht geht, wird der wert auf die eigene Position gestellt
+        if(moglichkeit[0] == 1 || moglichkeit[4] == 1) // wenn was nicht geht, wird der wert auf die eigene Position gestellt
         {
             x[0] = -1;
         }
@@ -125,7 +135,7 @@ public class bauer implements universell
         {
             x[0] = 0;
         }
-        if(moglichkeit[1] == 0)
+        if(moglichkeit[1] == 0 || moglichkeit[5] == 0)
         {
             x[1] = 0;
         }
@@ -133,7 +143,7 @@ public class bauer implements universell
         {
             x[1] = 0;
         }
-        if(moglichkeit[2] == 1)
+        if(moglichkeit[2] == 1 || moglichkeit[6] == 1)
         {
             x[2] = 1;
         }
@@ -141,7 +151,7 @@ public class bauer implements universell
         {
             x[2] = 0;
         }
-        if(moglichkeit[3] == 0 && first == true)
+        if((moglichkeit[3] == 0 && first == true) || (moglichkeit[7] == 0 && first == true))
         {
             x[3] = 0;
         }
@@ -194,7 +204,7 @@ public class bauer implements universell
         }
         else
         {
-            if(moglichkeit[5] == 1)
+            if(moglichkeit[4] == 1)
             {
                 y[0] = 1;
             }
@@ -202,7 +212,7 @@ public class bauer implements universell
             {
                 y[0] = 0;
             }
-            if(moglichkeit[6] == 0)
+            if(moglichkeit[5] == 0)
             {
                 y[1] = 1;
             }
@@ -210,7 +220,7 @@ public class bauer implements universell
             {
                 y[1] = 0;
             }
-            if(moglichkeit[7] == 1)
+            if(moglichkeit[6] == 1)
             {
                 y[2] = 1;
             }
