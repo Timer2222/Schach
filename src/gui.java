@@ -5,6 +5,7 @@ import src.klassen.frei;
 import src.klassen.turm;
 // import src.klassen.bauer;
 import src.klassen.universell;
+import src.klassen.unsichtbar;
 
 import java.awt.event.*;
 // import java.applet.*; // für Audio
@@ -108,24 +109,39 @@ public class gui extends JFrame implements ActionListener
             {
                 if(turn == true)
                 {
-                    if(logik.logikFeld[x][y].giveColor().equals(Color.WHITE))
+                    if(logik.logikFeld[x][y].giveID().equals("unsichtbar") && logik.logikFeld[x][y].giveAbstammungColor().equals(Color.WHITE))
                     {
-                        graphFeld[x][y].setEnabled(true);
+                        logik.logikFeld[x][y] = new frei();
                     }
                     else
                     {
-                        graphFeld[x][y].setEnabled(false);
+                        if(logik.logikFeld[x][y].giveColor().equals(Color.WHITE) && !logik.logikFeld[x][y].giveID().equals("unsichtbar"))
+                        {
+                            graphFeld[x][y].setEnabled(true);
+                        }
+                        else
+                        {
+                            graphFeld[x][y].setEnabled(false);
+                        }
                     }
+                  
                 }
                 else
                 {
-                    if(logik.logikFeld[x][y].giveColor().equals(Color.BLACK))
+                    if(logik.logikFeld[x][y].giveID().equals("unsichtbar") && logik.logikFeld[x][y].giveAbstammungColor().equals(Color.BLACK))
                     {
-                        graphFeld[x][y].setEnabled(true);
+                        logik.logikFeld[x][y] = new frei();
                     }
                     else
                     {
-                        graphFeld[x][y].setEnabled(false);
+                        if(logik.logikFeld[x][y].giveColor().equals(Color.BLACK) && !logik.logikFeld[x][y].giveID().equals("unsichtbar"))
+                        {
+                            graphFeld[x][y].setEnabled(true);
+                        }
+                        else
+                        {
+                            graphFeld[x][y].setEnabled(false);
+                        }
                     }
                 }
             }
@@ -152,11 +168,11 @@ public class gui extends JFrame implements ActionListener
         {
             for(int x = 1; x < 9; x++)
             {
-                if(turn == true && logik.logikFeld[x][y].giveColor().equals(Color.WHITE))
+                if(turn == true && logik.logikFeld[x][y].giveColor().equals(Color.WHITE) && !logik.logikFeld[x][y].giveID().equals("unsichtbar"))
                 {
                     graphFeld[x][y].setEnabled(true);
                 }
-                else if(turn == false && logik.logikFeld[x][y].giveColor().equals(Color.BLACK))
+                else if(turn == false && logik.logikFeld[x][y].giveColor().equals(Color.BLACK) && !logik.logikFeld[x][y].giveID().equals("unsichtbar"))
                 {
                     graphFeld[x][y].setEnabled(true);
                 }
@@ -193,7 +209,7 @@ public class gui extends JFrame implements ActionListener
                 if(event.getSource() == graphFeld[x][y])
                 {
                     figur = logik.logikFeld[x][y];
-                    if(!logik.logikFeld[x][y].giveID().equals("aussen") && !logik.logikFeld[x][y].giveID().equals("frei"))
+                    if(!logik.logikFeld[x][y].giveID().equals("aussen") && !logik.logikFeld[x][y].giveID().equals("frei") && !logik.logikFeld[x][y].giveColor().equals(Color.PINK))
                     {
                         if(turn == true && figur.giveColor().equals(Color.WHITE))
                         {
@@ -215,9 +231,24 @@ public class gui extends JFrame implements ActionListener
                             currentY = y;
                             faerber(x, xs, y, ys);
                         }
-                        else if((aktuelleFigur.giveColor().equals(Color.WHITE) && figur.giveColor().equals(Color.BLACK)) || (aktuelleFigur.giveColor().equals(Color.BLACK) && figur.giveColor().equals(Color.WHITE))) // hier wird angegriffen
+                        else if((aktuelleFigur.giveColor().equals(Color.WHITE) && figur.giveColor().equals(Color.BLACK)) || (aktuelleFigur.giveColor().equals(Color.BLACK) && figur.giveColor().equals(Color.WHITE)) || aktuelleFigur.giveID().equals("bauer") && figur.giveID().equals("unsichtbar")) // hier wird angegriffen
                         {
                             aktuelleFigur.setFirstfalse();
+                            if(logik.logikFeld[x][y].giveID().equals("unsichtbar"))
+                            {
+                                if(logik.logikFeld[x][y].giveAbstammungColor().equals(Color.WHITE))
+                                {
+                                    logik.freisetzer(x, y - 1); // hier wird der echte Bauer geloscht
+                                    ImageIcon frei = logik.logikFeld[x][y - 1].bild();
+                                    graphFeld[x][y - 1].setIcon(frei);
+                                }
+                                else
+                                {
+                                    logik.freisetzer(x, y + 1);
+                                    ImageIcon frei = logik.logikFeld[x][y + 1].bild();
+                                    graphFeld[x][y + 1].setIcon(frei);
+                                }
+                            }
                             logik.logikFeld[x][y] = aktuelleFigur;
                             ImageIcon bild = logik.logikFeld[x][y].bild();
                             graphFeld[x][y].setIcon(bild);
@@ -230,6 +261,25 @@ public class gui extends JFrame implements ActionListener
                     }
                     else
                     {
+                        // Moglich-Machung des En passant
+                        if(aktuelleFigur.giveID().equals("bauer"))
+                        {
+                            if(turn == true)
+                            {
+                                if(y == currentY - 2) // wird geschaut, ob der Bauer seinen "Sprung" gemacht hat
+                                {
+                                    logik.logikFeld[x][y + 1] = new unsichtbar(Color.WHITE);
+                                }
+                            }
+                            else
+                            {
+                                if(y == currentY + 2) // wird geschaut, ob der Bauer seinen "Sprung" gemacht hat
+                                {
+                                    logik.logikFeld[x][y - 1] = new unsichtbar(Color.BLACK);
+                                }
+                            }
+                        }
+
                         aktuelleFigur.setFirstfalse();
                         logik.logikFeld[x][y] = aktuelleFigur;
                         ImageIcon bild = logik.logikFeld[x][y].bild();

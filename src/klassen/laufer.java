@@ -246,7 +246,7 @@ public class laufer implements universell
         int zaehler = 0;
         for(int i = 1; i < 8; i++) // links nach oben
         {
-            if(feld[eigX - i][eigY - i].giveID().equals("frei"))
+            if(feld[eigX - i][eigY - i].giveID().equals("frei") || feld[eigX - i][eigY - i].giveID().equals("unsichtbar"))
             {
                 moglichkeiten[zaehler] = 0;
                 zaehler++;
@@ -284,7 +284,7 @@ public class laufer implements universell
         }
         for(int i = 1; i < 8; i++) // rechts oben
         {
-            if(feld[eigX + i][eigY - i].giveID().equals("frei"))
+            if(feld[eigX + i][eigY - i].giveID().equals("frei") || feld[eigX + i][eigY - i].giveID().equals("unsichtbar"))
             {
                 moglichkeiten[zaehler] = 0;
                 zaehler++;
@@ -322,7 +322,7 @@ public class laufer implements universell
         }
         for(int i = 1; i < 8; i++) // rechts unten
         {
-            if(feld[eigX + i][eigY + i].giveID().equals("frei"))
+            if(feld[eigX + i][eigY + i].giveID().equals("frei") || feld[eigX + i][eigY + i].giveID().equals("unsichtbar"))
             {
                 moglichkeiten[zaehler] = 0;
                 zaehler++;
@@ -360,7 +360,7 @@ public class laufer implements universell
         }
         for(int i = 1; i < 8; i++) // links unten
         {
-            if(feld[eigX - i][eigY + i].giveID().equals("frei"))
+            if(feld[eigX - i][eigY + i].giveID().equals("frei") || feld[eigX - i][eigY + i].giveID().equals("unsichtbar"))
             {
                 moglichkeiten[zaehler] = 0;
                 zaehler++;

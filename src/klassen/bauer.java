@@ -31,7 +31,7 @@ public class bauer implements universell
         if(eigeneFarbe.equals(Color.WHITE))
         {
             tester = feld[eigX - 1][eigY - 1];
-            if(tester.giveColor().equals(Color.BLACK))
+            if(tester.giveColor().equals(Color.BLACK) || tester.giveAbstammungColor().equals(Color.BLACK))
             {
                 moglichkeiten[0] = 1;
             }
@@ -51,7 +51,7 @@ public class bauer implements universell
                 moglichkeiten[3] = 2;
             }
             tester = feld[eigX + 1][eigY - 1];
-            if(tester.giveColor().equals(Color.BLACK))
+            if(tester.giveColor().equals(Color.BLACK) || tester.giveAbstammungColor().equals(Color.BLACK))
             {
                 moglichkeiten[2] = 1;
             }
@@ -68,7 +68,7 @@ public class bauer implements universell
         else
         {
             tester = feld[eigX - 1][eigY + 1];
-            if(tester.giveColor().equals(Color.WHITE))
+            if(tester.giveColor().equals(Color.WHITE) || tester.giveAbstammungColor().equals(Color.WHITE))
             {
                 moglichkeiten[4] = 1;
             }
@@ -88,7 +88,7 @@ public class bauer implements universell
                 moglichkeiten[7] = 2;
             }
             tester = feld[eigX + 1][eigY + 1];
-            if(tester.giveColor().equals(Color.WHITE))
+            if(tester.giveColor().equals(Color.WHITE) || tester.giveAbstammungColor().equals(Color.WHITE))
             {
                 moglichkeiten[6] = 1;
             }

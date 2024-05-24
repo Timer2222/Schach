@@ -148,7 +148,7 @@ public class springer implements universell
         {
             return 2;
         }
-        else if(feld[testX][testY].giveID().equals("frei"))
+        else if(feld[testX][testY].giveID().equals("frei") || feld[testX][testY].giveID().equals("unsichtbar"))
         {
             return 0;
         }
