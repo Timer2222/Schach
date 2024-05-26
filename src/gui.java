@@ -3,18 +3,23 @@ import javax.swing.*;
 
 import src.klassen.frei;
 import src.klassen.turm;
-// import src.klassen.bauer;
 import src.klassen.universell;
 import src.klassen.unsichtbar;
 
 import java.awt.event.*;
-// import java.applet.*; // für Audio
-// import java.io.*;
+import java.applet.*; // für Audio
+import java.io.*;
+import java.net.MalformedURLException;
 // import java.net.*;
 import java.awt.*;
+import java.util.Random;
 
 public class gui extends JFrame implements ActionListener
 {
+    File zug = new File("C:\\Users\\acer\\Documents\\Schule\\11.Klasse\\Informatik\\Schach\\lib\\sound\\4.wav");;
+    AudioClip clip;
+    Random random;
+    sprache sprache;
     boolean turn; //wenn true ist weiss dran, wenn false ist schwarz dran
     JButton[][] graphFeld;
     JButton starten;
@@ -23,8 +28,10 @@ public class gui extends JFrame implements ActionListener
     logik logik;
     universell aktuelleFigur;
     int currentX, currentY;
-    public gui()
+    public gui(String spracheWahl)
     {
+        sprache = new sprache(spracheWahl);
+        random = new Random();
         this.setSize(800,800);
         this.setLayout(null);
         this.setTitle("Schach von Anton Klonig und Tim Weber");
@@ -69,8 +76,8 @@ public class gui extends JFrame implements ActionListener
     public void initialisieren()
     {
         // Button nur fuer Anton und mich
-        starten = new JButton("Test starten");
-        starten.setBounds(600, 300, 100, 100);
+        starten = new JButton(sprache.startenButton());
+        starten.setBounds(600, 300, 150, 100);
         starten.addActionListener(this);
         this.add(starten);
 
@@ -208,7 +215,7 @@ public class gui extends JFrame implements ActionListener
             boolean matt = logik.CheckForMatt(logik.logikFeld, logik.art.art, turn);
             if(matt == true)
             {
-                System.out.println("MATT");
+                System.out.println(sprache.Matt());
                 for(int y = 1; y < 9; y++)
                 {
                     for(int x = 1; x < 9; x++)
@@ -218,11 +225,11 @@ public class gui extends JFrame implements ActionListener
                 }
                 if(turn == true)
                 {
-                    System.out.println("Gewonnen hat Schwarz.");
+                    System.out.println(sprache.schwarzSieg());
                 }
                 else
                 {
-                    System.out.println("Gewonnen hat Weiss.");
+                    System.out.println(sprache.weissSieg());
                 }
             }
         }
@@ -231,7 +238,7 @@ public class gui extends JFrame implements ActionListener
             boolean patt = logik.CheckForPatt(logik.logikFeld, logik.art.art, turn);
             if(patt == true)
             {
-                System.out.println("PATT");
+                System.out.println(sprache.Patt());
                 for(int y = 1; y < 9; y++)
                 {
                     for(int x = 1; x < 9; x++)
@@ -301,6 +308,7 @@ public class gui extends JFrame implements ActionListener
                                     graphFeld[x][y + 1].setIcon(frei);
                                 }
                             }
+                            playZug();
                             logik.logikFeld[x][y] = aktuelleFigur;
                             ImageIcon bild = logik.logikFeld[x][y].bild();
                             graphFeld[x][y].setIcon(bild);
@@ -333,6 +341,7 @@ public class gui extends JFrame implements ActionListener
                         }
 
                         aktuelleFigur.setFirstfalse();
+                        playZug();
                         logik.logikFeld[x][y] = aktuelleFigur;
                         ImageIcon bild = logik.logikFeld[x][y].bild();
                         graphFeld[x][y].setIcon(bild);
@@ -426,10 +435,23 @@ public class gui extends JFrame implements ActionListener
         }
     }
 
+    public void playZug()
+    {
+        try
+        {
+            clip = Applet.newAudioClip(zug.toURL());
+            clip.play();
+        }
+        catch (MalformedURLException e)
+        {
+            System.out.println("Error"  + e);
+        }   
+    }
+
 
     public static void main(String[] args) 
     {
-        gui test = new gui();
+        gui test = new gui("russisch");
         test.setVisible(true);
     }
 }
