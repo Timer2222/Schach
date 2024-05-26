@@ -1,10 +1,7 @@
 package src;
 import javax.swing.*;
 
-import src.klassen.frei;
-import src.klassen.turm;
-import src.klassen.universell;
-import src.klassen.unsichtbar;
+import src.klassen.*;
 
 import java.awt.event.*;
 import java.applet.*; // für Audio
@@ -16,7 +13,7 @@ import java.util.Random;
 
 public class gui extends JFrame implements ActionListener
 {
-    File zug = new File("C:\\Users\\acer\\Documents\\Schule\\11.Klasse\\Informatik\\Schach\\lib\\sound\\4.wav");;
+    File zug = new File("Schach\\lib\\sound\\4.wav");;
     AudioClip clip;
     Random random;
     sprache sprache;
@@ -34,7 +31,7 @@ public class gui extends JFrame implements ActionListener
         random = new Random();
         this.setSize(800,800);
         this.setLayout(null);
-        this.setTitle("Schach von Anton Klonig und Tim Weber");
+        this.setTitle(sprache.Titel());
         turn = true; // true = weiss dran
         graphFeld = new JButton[10][10];
         logik = new logik();
@@ -449,9 +446,5 @@ public class gui extends JFrame implements ActionListener
     }
 
 
-    public static void main(String[] args) 
-    {
-        gui test = new gui("russisch");
-        test.setVisible(true);
-    }
+    
 }
