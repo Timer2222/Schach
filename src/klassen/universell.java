@@ -9,8 +9,8 @@ public interface universell //brauchen wir um alle klassen nutzen zu können
     public Color giveColor();
     public boolean giveFirst();
     public void setFirstfalse(); // braucht nur der Bauer
-    public int[] giveAngriffX();
-    public int[] giveAngriffY();
+    public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY);
+    public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY);
     public Color giveAbstammungColor();
     public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY);
     public int[] ymoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY); // first nur für bauer

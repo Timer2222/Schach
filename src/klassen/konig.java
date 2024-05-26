@@ -112,8 +112,22 @@ public class konig implements universell
             }
         }
         zaehler = -1;
-        x[3] = -1;
-        x[4] = 1;
+        if(moglichkeit[3] == 0 || moglichkeit[3] == 1)
+        {
+            x[3] = -1;
+        }
+        else
+        {
+            x[3] = 0;
+        }
+        if(moglichkeit[4] == 0 || moglichkeit[4] == 1)
+        {
+            x[4] = 1;
+        }
+        else
+        {
+            x[4] = 0;
+        }
         for(int ii = 5; ii < 8; ii++)
         {
             if(moglichkeit[ii] == 0 || moglichkeit[ii] == 1)
@@ -149,7 +163,7 @@ public class konig implements universell
             {
                 if(y == 0 && x == 0)
                 {
-                    x = 1;
+                    x = 1; // eigene pos uberspringen
                 }
                 if(eigeneFarbe.equals(Color.WHITE))
                 {
@@ -219,7 +233,7 @@ public class konig implements universell
         return moglichkeiten;
     }
 
-    public int[] giveAngriffX()
+    public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] angX = new int[8]; 
         angX[0] = -1;
@@ -233,7 +247,7 @@ public class konig implements universell
         return angX;
     }
 
-    public int[] giveAngriffY()
+    public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] angY = new int[8];
         for(int i = 0; i < 3; i++)

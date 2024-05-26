@@ -178,31 +178,53 @@ public class springer implements universell
         }
     }
 
-    public int[] giveAngriffX()
+    public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] angX = new int[8];
-        angX[0] = -2;
-        angX[1] = -1;
-        angX[2] = 1;
-        angX[3] = 2;
-        angX[4] = 2;
-        angX[5] = 1;
-        angX[6] = -1;
-        angX[7] = -2;
+        for(int i = 0; i < 8; i++)
+        {
+            if(i == 0 || i == 7)
+            {
+                angX[i] = -2;
+            }
+            else if(i == 1 || i == 6)
+            {
+                angX[i] = -1;
+            }
+            else if(i == 2 || i == 5)
+            {
+                angX[i] = 1;
+            }
+            else if(i == 3 || i == 4)
+            {
+                angX[i] = 2;
+            }
+        }
         return angX;
     }
 
-    public int[] giveAngriffY()
+    public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] angY = new int[8];
-        angY[0] = 1;
-        angY[1] = 2;
-        angY[2] = 2;
-        angY[3] = 1;
-        angY[4] = -1;
-        angY[5] = -2;
-        angY[6] = -2;
-        angY[7] = -1;
+        for(int i = 0; i < 8; i++)
+        {
+            if(i == 1 || i == 2)
+            {
+                angY[i] = -2;
+            }
+            else if(i == 0 || i == 3)
+            {
+                angY[i] = -1;
+            }
+            else if(i == 4 || i == 7)
+            {
+                angY[i] = 1;
+            }
+            else if(i == 5 || i == 6)
+            {
+                angY[i] = 2;
+            }
+        }
         return angY;
     }
 }

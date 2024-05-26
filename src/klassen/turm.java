@@ -371,54 +371,128 @@ public class turm implements universell
         return moglichkeiten;
     }
 
-    public int[] giveAngriffX()
+    public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] angX = new int[28]; // alle Seiten maximal, in Logik wir dann gestoppt mithilfe der "aussen"-Felder
-        int zaehler = -1;
-        for(int i = 0; i < 7; i++) // links
+        int[] angX = new int[14]; 
+        int[] moglichkeit = schauer(feld, art, eigX, eigY);
+        int Xzaehler = -1;
+        int zaehler = 1;
+        for(int i = 0; i < moglichkeit.length; i++)
         {
-            angX[i] = zaehler;
-            zaehler--;
-        }
-        for(int i = 7; i < 14; i++) // oben
-        {
-            angX[i] = 0;
-        }
-        zaehler = 1;
-        for(int i = 14; i < 21; i++) // rechts
-        {
-            angX[i] = zaehler;
-            zaehler++;
-        }
-        for(int i = 21; i < 28; i++) // unten
-        {
-            angX[i] = 0;
+            if(zaehler == 1) // links
+            {
+                if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
+                {
+                    angX[i] = Xzaehler;
+                    zaehler = 2;
+                    Xzaehler = 1;
+                }
+                else
+                {
+                    angX[i] = Xzaehler;
+                    Xzaehler--;
+                }
+            }
+            else if(zaehler == 2) // oben
+            {
+                if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
+                {
+                    angX[i] = 0;
+                    zaehler = 3;
+                }
+                else
+                {
+                    angX[i] = 0;
+                }
+            }
+            else if(zaehler == 3) // rechts
+            {
+                if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
+                {
+                    angX[i] = Xzaehler;
+                    zaehler = 4;
+                }
+                else
+                {
+                    angX[i] = Xzaehler;
+                    Xzaehler++;
+                }
+            }
+            else if(zaehler == 2) // unten
+            {
+                if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
+                {
+                    angX[i] = 0;
+                    i = moglichkeit.length;
+                }
+                else
+                {
+                    angX[i] = 0;
+                }
+            }
         }
         return angX;
     }
 
-    public int[] giveAngriffY()
+    public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] angY = new int[28]; // alle Seiten maximal, in Logik wir dann gestoppt mithilfe der "aussen"-Felder
+        int[] angY = new int[14];
+        int[] moglichkeit = schauer(feld, art, eigX, eigY);
+        int Yzaehler = -1;
         int zaehler = 1;
-        for(int i = 0; i < 7; i++) // links
+        for(int i = 0; i < moglichkeit.length; i++)
         {
-            angY[i] = 0;
-        }
-        for(int i = 7; i < 14; i++) // oben
-        {
-            angY[i] = zaehler;
-            zaehler++;
-        }
-        for(int i = 14; i < 21; i++) // rechts
-        {
-            angY[i] = 0;
-        }
-        zaehler = -1;
-        for(int i = 21; i < 28; i++) // unten
-        {
-            angY[i] = zaehler;
-            zaehler--;
+            if(zaehler == 1) // links
+            {
+                if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
+                {
+                    angY[i] = 0;
+                    zaehler = 2;
+                }
+                else
+                {
+                    angY[i] = 0;
+                }
+            }
+            else if(zaehler == 2) // oben
+            {
+                if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
+                {
+                    angY[i] = Yzaehler;
+                    zaehler = 3;
+                    Yzaehler = 1;
+                }
+                else
+                {
+                    angY[i] = Yzaehler;
+                    Yzaehler--;
+                }
+            }
+            else if(zaehler == 3) // rechts
+            {
+                if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
+                {
+                    angY[i] = 0;
+                    zaehler = 4;
+                }
+                else
+                {
+                    angY[i] = 0;
+                }
+            }
+            else if(zaehler == 2) // unten
+            {
+                if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
+                {
+                    angY[i] = Yzaehler;
+                    i =moglichkeit.length;
+                }
+                else
+                {
+                    angY[i] = Yzaehler;
+                    Yzaehler++;
+                }
+            }
         }
         return angY;
     }

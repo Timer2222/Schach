@@ -105,7 +105,7 @@ public class bauer implements universell
         return moglichkeiten;
     }
 
-    public int[] giveAngriffX()
+    public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] angriffe = new int[2];
         angriffe[0] = -1;
@@ -113,11 +113,19 @@ public class bauer implements universell
         return angriffe;
     }
 
-    public int[] giveAngriffY()
+    public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] angriffe = new int[2];
-        angriffe[0] = -1;
-        angriffe[1] = -1;
+        if(eigeneFarbe.equals(Color.WHITE))
+        {
+            angriffe[0] = -1;
+            angriffe[1] = -1;
+        }
+        else
+        {
+            angriffe[0] = 1;
+            angriffe[1] = 1;
+        }
         return angriffe;
     }
 

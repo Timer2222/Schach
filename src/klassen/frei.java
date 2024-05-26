@@ -66,14 +66,14 @@ public class frei implements universell
         return platzhalter;
     }
 
-    public int[] giveAngriffX()
+    public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] platzhalter = new int[1]; 
         platzhalter[0] = 0; 
         return platzhalter;
     }
 
-    public int[] giveAngriffY()
+    public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         int[] platzhalter = new int[1];
         platzhalter[0] = 0; 

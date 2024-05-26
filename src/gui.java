@@ -28,7 +28,7 @@ public class gui extends JFrame implements ActionListener
         this.setSize(800,800);
         this.setLayout(null);
         this.setTitle("Schach von Anton Klonig und Tim Weber");
-        turn = true;
+        turn = true; // true = weiss dran
         graphFeld = new JButton[10][10];
         logik = new logik();
         lightGreen = new Color(115, 240, 135);
@@ -103,7 +103,7 @@ public class gui extends JFrame implements ActionListener
 
     public void nachsteRunde()
     {
-        logik.art.art = logik.art.aktualisieren(turn);
+        logik.art.art = logik.art.aktualisieren(turn, logik.art.art, logik.logikFeld);
         for(int y = 1; y < 9; y++)
         {
             for(int x = 1; x < 9; x++)
@@ -125,7 +125,6 @@ public class gui extends JFrame implements ActionListener
                             graphFeld[x][y].setEnabled(false);
                         }
                     }
-                  
                 }
                 else
                 {
@@ -147,6 +146,7 @@ public class gui extends JFrame implements ActionListener
                 }
             }
         }
+        ende();
     }
 
     public void figurenEinfugen()
@@ -183,7 +183,64 @@ public class gui extends JFrame implements ActionListener
                 }
             }
         }
-        
+        ende();
+    }
+
+    public void ende()
+    {
+        boolean schach = logik.CheckForSchach(logik.logikFeld, logik.art.art, turn);
+        if(schach == true)
+        {
+            for(int y = 1; y < 9; y++)
+            {
+                for(int x = 1; x < 9; x++)
+                {
+                    if(turn == true && logik.logikFeld[x][y].giveID().equals("konig") && logik.logikFeld[x][y].giveColor().equals(Color.WHITE))
+                    {
+                        graphFeld[x][y].setBackground(red);
+                    }
+                    else if(turn == false && logik.logikFeld[x][y].giveID().equals("konig") && logik.logikFeld[x][y].giveColor().equals(Color.BLACK))
+                    {
+                        graphFeld[x][y].setBackground(red);
+                    }
+                }
+            }
+            boolean matt = logik.CheckForMatt(logik.logikFeld, logik.art.art, turn);
+            if(matt == true)
+            {
+                System.out.println("MATT");
+                for(int y = 1; y < 9; y++)
+                {
+                    for(int x = 1; x < 9; x++)
+                    {
+                        graphFeld[x][y].setEnabled(false);
+                    }
+                }
+                if(turn == true)
+                {
+                    System.out.println("Gewonnen hat Schwarz.");
+                }
+                else
+                {
+                    System.out.println("Gewonnen hat Weiss.");
+                }
+            }
+        }
+        else
+        {
+            boolean patt = logik.CheckForPatt(logik.logikFeld, logik.art.art, turn);
+            if(patt == true)
+            {
+                System.out.println("PATT");
+                for(int y = 1; y < 9; y++)
+                {
+                    for(int x = 1; x < 9; x++)
+                    {
+                        graphFeld[x][y].setEnabled(false);
+                    }
+                }
+            }
+        }
     }
 
 
