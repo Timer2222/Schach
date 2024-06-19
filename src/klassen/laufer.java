@@ -242,7 +242,7 @@ public class laufer implements universell
 
     public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] moglichkeiten = new int[13]; // 13 als Maximal-Fall der abdeckbaren Felder
+        int[] moglichkeiten = new int[17]; // 13 als Maximal-Fall der abdeckbaren Felder
         int zaehler = 0;
         for(int i = 1; i < 8; i++) // links nach oben
         {
@@ -405,7 +405,7 @@ public class laufer implements universell
 
     public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] angX = new int[13];
+        int[] angX = new int[17];
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         int zaehler = 1;
         int Xzaehler = -1;
@@ -453,11 +453,15 @@ public class laufer implements universell
                     Xzaehler++;
                 }
             }
-            else if(zaehler == 1) // links unten
+            else if(zaehler == 4) // links unten
             {
                 if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
                 {
                     angX[i] = Xzaehler;
+                    for(int ii = i; ii < moglichkeit.length; ii++)
+                    {
+                        angX[ii] = angX[1];
+                    }
                     i = moglichkeit.length;
                 }
                 else
@@ -472,7 +476,7 @@ public class laufer implements universell
 
     public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] angY = new int[13];
+        int[] angY = new int[17];
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         int zaehler = 1;
         int Yzaehler = -1;
@@ -520,11 +524,15 @@ public class laufer implements universell
                     Yzaehler++;
                 }
             }
-            else if(zaehler == 1) // links unten
+            else if(zaehler == 4) // links unten
             {
                 if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
                 {
                     angY[i] = Yzaehler;
+                    for(int ii = i; ii < moglichkeit.length; ii++)
+                    {
+                        angY[ii] = angY[1];
+                    }
                     i = moglichkeit.length;
                 }
                 else

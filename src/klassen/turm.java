@@ -54,7 +54,7 @@ public class turm implements universell
 
     public int[] ymoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] y = new int[14];
+        int[] y = new int[18];
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         int zaehler = 1; // dafur da, um die 4 Seiten abzudecken
         int hochzaehler = -1;
@@ -121,11 +121,11 @@ public class turm implements universell
                 else if(moglichkeit[i] == 1)
                 {
                     y[i] = hochzaehler;
-                    i = 14; // raus aus der For-Schleife
+                    i = 18; // raus aus der For-Schleife
                 }
                 else 
                 {
-                    i = 14; // raus aus der For-Schleife
+                    i = 18; // raus aus der For-Schleife
                 }
             }
         }
@@ -134,7 +134,7 @@ public class turm implements universell
 
     public int[] xmoglichesFeld(boolean first, universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] x = new int[14];
+        int[] x = new int[18];
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         int zaehler = 1; // dafur da, um die 4 Seiten abzudecken
         int hochzaehler = -1;
@@ -201,11 +201,11 @@ public class turm implements universell
                 else if(moglichkeit[i] == 1)
                 {
                     x[i] = 0;
-                    i = 14; // raus aus der For-Schleife
+                    i = 18; // raus aus der For-Schleife
                 }
                 else 
                 {
-                    i = 14; // raus aus der For-Schleife
+                    i = 18; // raus aus der For-Schleife
                 }
             }
         }
@@ -214,7 +214,7 @@ public class turm implements universell
 
     public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] moglichkeiten = new int[14];
+        int[] moglichkeiten = new int[18];
         int i = 0;
         for(int x = eigX - 1; x >= 0; x--) // alles vom Turm nach links
         {
@@ -373,7 +373,7 @@ public class turm implements universell
 
     public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] angX = new int[14]; 
+        int[] angX = new int[18]; 
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         int Xzaehler = -1;
         int zaehler = 1;
@@ -418,11 +418,15 @@ public class turm implements universell
                     Xzaehler++;
                 }
             }
-            else if(zaehler == 2) // unten
+            else if(zaehler == 4) // unten
             {
                 if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
                 {
                     angX[i] = 0;
+                    for(int ii = i; ii < moglichkeit.length; ii++)
+                    {
+                        angX[ii] = angX[1];
+                    }
                     i = moglichkeit.length;
                 }
                 else
@@ -436,7 +440,7 @@ public class turm implements universell
 
     public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] angY = new int[14];
+        int[] angY = new int[18];
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         int Yzaehler = -1;
         int zaehler = 1;
@@ -480,12 +484,16 @@ public class turm implements universell
                     angY[i] = 0;
                 }
             }
-            else if(zaehler == 2) // unten
+            else if(zaehler == 4) // unten
             {
                 if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
                 {
                     angY[i] = Yzaehler;
-                    i =moglichkeit.length;
+                    for(int ii = i; ii < moglichkeit.length; ii++)
+                    {
+                        angY[ii] = angY[1];
+                    }
+                    i = moglichkeit.length;
                 }
                 else
                 {

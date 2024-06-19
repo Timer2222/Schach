@@ -211,6 +211,7 @@ public class dame implements universell
                 else if(moglichkeit[i] == 1)
                 {
                     y[i] = yzaehler;
+                    zaehler = 5;
                     for(int ii = i + 1; ii < 27; ii++)
                     {
                         y[ii] = 0;
@@ -392,6 +393,7 @@ public class dame implements universell
                 else if(moglichkeit[i] == 1)
                 {
                     x[i] = xzaehler;
+                    zaehler = 5;
                     for(int ii = i + 1; ii < 27; ii++)
                     {
                         x[ii] = 0;
@@ -412,7 +414,7 @@ public class dame implements universell
 
     public int[] schauer(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
-        int[] moglichkeiten = new int[27]; // hier wird der Code vom Turm und Laufer nacheinander in der selben Reihenfolge verbunden
+        int[] moglichkeiten = new int[31]; // hier wird der Code vom Turm und Laufer nacheinander in der selben Reihenfolge verbunden
         int i = 0;
         for(int x = eigX - 1; x >= 0; x--) // alles vom Turm nach links
         {
@@ -730,7 +732,7 @@ public class dame implements universell
     public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         // wie Schauer
-        int[] angX = new int[27]; // 27 weil Turm + Laufer
+        int[] angX = new int[31]; // 27 weil Turm + Laufer
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         // Turm
         int Xzaehler = -1;
@@ -776,11 +778,15 @@ public class dame implements universell
                     Xzaehler++;
                 }
             }
-            else if(zaehler == 2) // unten
+            else if(zaehler == 4) // unten
             {
                 if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
                 {
                     angX[i] = 0;
+                    for(int ii = i; ii < 14; ii++)
+                    {
+                        angX[ii] = angX[1];
+                    }
                     i = 14;
                 }
                 else
@@ -836,11 +842,15 @@ public class dame implements universell
                     Xzaehler++;
                 }
             }
-            else if(zaehler == 1) // links unten
+            else if(zaehler == 4) // links unten
             {
                 if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
                 {
                     angX[i] = Xzaehler;
+                    for(int ii = i; ii < moglichkeit.length; ii++)
+                    {
+                        angX[ii] = angX[1];
+                    }
                     i = moglichkeit.length;
                 }
                 else
@@ -856,7 +866,7 @@ public class dame implements universell
     public int[] giveAngriffY(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         // wie Schauer
-        int[] angY = new int[27]; // alle Seiten maximal, in Logik wir dann gestoppt mithilfe der "aussen"-Felder
+        int[] angY = new int[31]; // alle Seiten maximal, in Logik wir dann gestoppt mithilfe der "aussen"-Felder
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         // Turm
         int Yzaehler = -1;
@@ -901,11 +911,15 @@ public class dame implements universell
                     angY[i] = 0;
                 }
             }
-            else if(zaehler == 2) // unten
+            else if(zaehler == 4) // unten
             {
                 if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
                 {
                     angY[i] = Yzaehler;
+                    for(int ii = i; ii < 14; ii++)
+                    {
+                        angY[ii] = angY[1];
+                    }
                     i = 14;
                 }
                 else
@@ -963,11 +977,15 @@ public class dame implements universell
                     Yzaehler++;
                 }
             }
-            else if(zaehler == 1) // links unten
+            else if(zaehler == 4) // links unten
             {
                 if(moglichkeit[i] == 1 || moglichkeit[i] == 2)
                 {
                     angY[i] = Yzaehler;
+                    for(int ii = i; ii < moglichkeit.length; ii++)
+                    {
+                        angY[ii] = angY[1];
+                    }
                     i = moglichkeit.length;
                 }
                 else

@@ -206,9 +206,13 @@ public class konig implements universell
         if(first == true && feld[eigX + 3][eigY].giveFirst() == true && feld[eigX + 1][eigY].giveID().equals("frei") && feld[eigX + 2][eigY].giveID().equals("frei"))
         {
             // feldenart-check
-            if(art[eigX + 1][eigY].giveID().equals("frei") && art[eigX + 2][eigY].giveID().equals("frei"))
+            if(art[eigX][eigY].giveID().equals("frei") && art[eigX + 1][eigY].giveID().equals("frei") && art[eigX + 2][eigY].giveID().equals("frei"))
             {
                 moglichkeiten[8] = 0;
+            }
+            else
+            {
+                moglichkeiten[8] = 2;
             }
         }
         else
@@ -221,9 +225,13 @@ public class konig implements universell
         if(first == true && feld[eigX - 4][eigY].giveFirst() == true && feld[eigX - 1][eigY].giveID().equals("frei") && feld[eigX - 2][eigY].giveID().equals("frei") && feld[eigX - 3][eigY].giveID().equals("frei"))
         {
             // feldenart-check
-            if(art[eigX - 1][eigY].giveID().equals("frei") && art[eigX - 2][eigY].giveID().equals("frei"))
+            if(art[eigX][eigY].giveID().equals("frei") && art[eigX - 1][eigY].giveID().equals("frei") && art[eigX - 2][eigY].giveID().equals("frei"))
             {
                 moglichkeiten[9] = 0;
+            }
+            else
+            {
+                moglichkeiten[9] = 2;
             }
         }
         else

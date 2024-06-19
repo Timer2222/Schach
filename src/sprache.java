@@ -46,6 +46,80 @@ public class sprache
         return "Fehler, keine Ubersetzung";
     }
 
+    public String dame()
+    {
+        if(gewahlteSprache.equals("Deutsch"))
+        return "Dame";
+
+        else if(gewahlteSprache.equals("Русский"))
+        return "ферзь";
+
+        else if(gewahlteSprache.equals("English"))
+        return "queen";
+
+        else if(gewahlteSprache.equals("Français"))
+        return "dame";
+        
+        else 
+        return "Fehler, keine Ubersetzung";
+    }
+
+    public String turm()
+    {
+        if(gewahlteSprache.equals("Deutsch"))
+        return "Turm";
+
+        else if(gewahlteSprache.equals("Русский"))
+        return "ладья";
+
+        else if(gewahlteSprache.equals("English"))
+        return "rook";
+
+        else if(gewahlteSprache.equals("Français"))
+        return "tour";
+        
+        else 
+        return "Fehler, keine Ubersetzung";
+    }
+
+    public String laufer()
+    {
+        if(gewahlteSprache.equals("Deutsch"))
+        return "Laeufer";
+
+        else if(gewahlteSprache.equals("Русский"))
+        return "слон";
+
+        else if(gewahlteSprache.equals("English"))
+        return "bishop";
+
+        else if(gewahlteSprache.equals("Français"))
+        return "fou";
+        
+        else 
+        return "Fehler, keine Ubersetzung";
+    }
+
+    public String springer()
+    {
+        if(gewahlteSprache.equals("Deutsch"))
+        return "Springer";
+
+        else if(gewahlteSprache.equals("Русский"))
+        return "конь";
+
+        else if(gewahlteSprache.equals("English"))
+        return "knight";
+
+        else if(gewahlteSprache.equals("Français"))
+        return "cavalier";
+        
+        else 
+        return "Fehler, keine Ubersetzung";
+    }
+
+    
+
     public String Matt()
     {
         if(gewahlteSprache.equals("Deutsch"))
@@ -121,7 +195,7 @@ public class sprache
     public String SpracheWahlen()
     {
         if(gewahlteSprache.equals("Deutsch"))
-        return "Sprache wählen";
+        return "Sprache waehlen";
 
         else if(gewahlteSprache.equals("Русский"))
         return "выбрать язык";
