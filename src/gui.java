@@ -21,6 +21,7 @@ public class gui extends JFrame implements ActionListener
     boolean turn; //wenn true ist weiss dran, wenn false ist schwarz dran
     JButton[][] graphFeld;
     JButton starten, dameweiss, turmweiss, lauferweiss, springerweiss, dameschwarz, turmschwarz, lauferschwarz, springerschwarz;
+    JLabel[] Beschriftung;
     boolean schwarz = false;
     Color lightGreen, darkGreen, red;
     logik logik;
@@ -128,17 +129,17 @@ public class gui extends JFrame implements ActionListener
         this.add(springerschwarz);
 
         int yzaehler = 0;
-        for(int i = 0; i < 10; i++)
+        for(int y = 0; y < 10; y++)
         {
             int xzaehler = 0;
             
-            for(int ii = 0; ii < 10; ii++)
+            for(int x = 0; x < 10; x++)
             {
-                graphFeld[ii][i] = new JButton();
-                graphFeld[ii][i].setEnabled(false);
-                graphFeld[ii][i].setBounds(50 + xzaehler,50 + yzaehler,60,60);
-                graphFeld[ii][i].addActionListener(this);
-                this.add(graphFeld[ii][i]);
+                graphFeld[x][y] = new JButton();
+                graphFeld[x][y].setEnabled(false);
+                graphFeld[x][y].setBounds(50 + xzaehler,50 + yzaehler,60,60);
+                graphFeld[x][y].addActionListener(this);
+                this.add(graphFeld[x][y]);
                 xzaehler = xzaehler + 60;
             }
             yzaehler = yzaehler + 60;
@@ -151,6 +152,57 @@ public class gui extends JFrame implements ActionListener
             graphFeld[9][i].setVisible(false);
             graphFeld[i][0].setVisible(false);
             graphFeld[i][9].setVisible(false);
+        }
+
+        // Beschriftung hinzufugen
+        Beschriftung = new JLabel[32];
+        // unten
+        int zahl = 65;
+        int zaehler = 0;
+        int Xzaehler = 0;
+        for(int i = 0; i < 8; i++)
+        {
+            Beschriftung[i] = new JLabel((char)(zahl + zaehler) + "");
+            Beschriftung[i].setBounds(135 + Xzaehler, 575, 50, 50);
+            this.add(Beschriftung[i]);
+            Xzaehler += 60;
+            zaehler++;
+        }
+        // oben
+        zahl = 65;
+        zaehler = 0;
+        Xzaehler = 0;
+        for(int i = 8; i < 16; i++)
+        {;
+            Beschriftung[i] = new JLabel((char)(zahl + zaehler) + "");
+            Beschriftung[i].setBounds(135 + Xzaehler, 75, 50, 50);
+            this.add(Beschriftung[i]);
+            Xzaehler += 60;
+            zaehler++;
+        }
+        // links
+        zahl = 49;
+        zaehler = 0;
+        int Yzaehler = 0;
+        for(int i = 16; i < 24; i++)
+        {
+            Beschriftung[i] = new JLabel((char)(zahl + zaehler) + "");
+            Beschriftung[i].setBounds(95, 110 + Yzaehler, 50, 50);
+            this.add(Beschriftung[i]);
+            Yzaehler += 60;
+            zaehler++;
+        }
+        // rechts
+        zahl = 49;
+        zaehler = 0;
+        Yzaehler = 0;
+        for(int i = 24; i < 32; i++)
+        {
+            Beschriftung[i] = new JLabel((char)(zahl + zaehler) + "");
+            Beschriftung[i].setBounds(600, 110 + Yzaehler, 50, 50);
+            this.add(Beschriftung[i]);
+            Yzaehler += 60;
+            zaehler++;
         }
     }
 
