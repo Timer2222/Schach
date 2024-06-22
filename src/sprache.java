@@ -192,6 +192,24 @@ public class sprache
         return "Fehler, keine Ubersetzung";
     }
 
+    public String musik()
+    {
+        if(gewahlteSprache.equals("Deutsch"))
+        return "Musik an/aus";
+
+        else if(gewahlteSprache.equals("Русский"))
+        return "Музыка вкл/выкл";
+
+        else if(gewahlteSprache.equals("English"))
+        return "Music on/off";
+
+        else if(gewahlteSprache.equals("Français"))
+        return "Musique activée/désactivée";
+        
+        else 
+        return "Fehler, keine Ubersetzung";
+    }
+
     public String SpracheWahlen()
     {
         if(gewahlteSprache.equals("Deutsch"))
@@ -241,6 +259,60 @@ public class sprache
 
         else if(gewahlteSprache.equals("Français"))
         return "Les échecs d'Anton Klonig et Tim Weber";
+        
+        else 
+        return "Fehler, keine Ubersetzung";
+    }
+
+    public String spielende()
+    {
+        if(gewahlteSprache.equals("Deutsch"))
+        return "Spiel vorbei";
+
+        else if(gewahlteSprache.equals("Русский"))
+        return "игра закончена";
+
+        else if(gewahlteSprache.equals("English"))
+        return "game over";
+
+        else if(gewahlteSprache.equals("Français"))
+        return "jeu terminé";
+        
+        else 
+        return "Fehler, keine Ubersetzung";
+    }
+
+    public String wiederholen()
+    {
+        if(gewahlteSprache.equals("Deutsch"))
+        return "Wiederholen";
+
+        else if(gewahlteSprache.equals("Русский"))
+        return "Повторить";
+
+        else if(gewahlteSprache.equals("English"))
+        return "Repeat";
+
+        else if(gewahlteSprache.equals("Français"))
+        return "Répéter";
+        
+        else 
+        return "Fehler, keine Ubersetzung";
+    }
+
+    public String home()
+    {
+        if(gewahlteSprache.equals("Deutsch"))
+        return "Home";
+
+        else if(gewahlteSprache.equals("Русский"))
+        return "домашняя страница";
+
+        else if(gewahlteSprache.equals("English"))
+        return "Home";
+
+        else if(gewahlteSprache.equals("Français"))
+        return "page d'accueil";
         
         else 
         return "Fehler, keine Ubersetzung";

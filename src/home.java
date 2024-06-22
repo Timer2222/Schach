@@ -5,6 +5,8 @@ import javax.swing.*;
 import javax.sound.sampled.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import java.awt.Color;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +43,7 @@ public class home extends JFrame implements ActionListener, ChangeListener
         layeredPane.add(Beginn, Integer.valueOf(1));
 
         SpracheLabel = new JLabel("Sprache waehlen");
-        SpracheLabel.setBounds(450, 150, 200, 50);
+        SpracheLabel.setBounds(460, 150, 200, 50);
         layeredPane.add(SpracheLabel, Integer.valueOf(1));
 
         // Dropdown-Menü für Sprachauswahl
@@ -55,13 +57,14 @@ public class home extends JFrame implements ActionListener, ChangeListener
         SpracheAnnehmen.addActionListener(this);
         layeredPane.add(SpracheAnnehmen, Integer.valueOf(1));
 
-        MusikButton = new JButton("Musik An/Aus");
+        MusikButton = new JButton("Musik an/aus");
         MusikButton.setBounds(50, 600, 200, 50);
         MusikButton.addActionListener(this);
         layeredPane.add(MusikButton, Integer.valueOf(1));
 
         LautstarkeRegler = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
         LautstarkeRegler.setBounds(50, 650, 200, 50);
+        LautstarkeRegler.setOpaque(false); // durchsichtig machen
         LautstarkeRegler.addChangeListener(this);
         layeredPane.add(LautstarkeRegler, Integer.valueOf(1));
 
@@ -99,6 +102,7 @@ public class home extends JFrame implements ActionListener, ChangeListener
             SpracheAnnehmen.setText(sprache.Speichern());
             SpracheLabel.setText(sprache.SpracheWahlen());
             Beginn.setText(sprache.Spielen());
+            MusikButton.setText(sprache.musik());
             this.setTitle(sprache.Titel());
         }
 

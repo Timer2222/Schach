@@ -327,7 +327,7 @@ public class gui extends JFrame implements ActionListener
         }
         else if(schach == 2)
         {
-            System.out.println(sprache.Matt());
+            // System.out.println(sprache.Matt());
             for(int y = 1; y < 9; y++)
             {
                 for(int x = 1; x < 9; x++)
@@ -337,11 +337,17 @@ public class gui extends JFrame implements ActionListener
             }
             if(turn == true)
             {
-                System.out.println(sprache.schwarzSieg());
+                // System.out.println(sprache.schwarzSieg());
+                ende ende = new ende(1,sprache.gewahlteSprache);
+                this.setVisible(false);
+                ende.setVisible(true);
             }
             else
             {
-                System.out.println(sprache.weissSieg());
+                // System.out.println(sprache.weissSieg());
+                ende ende = new ende(2, sprache.gewahlteSprache);
+                this.setVisible(false);
+                ende.setVisible(true);
             }
         }
         else
@@ -349,14 +355,17 @@ public class gui extends JFrame implements ActionListener
             boolean patt = logik.CheckForPatt(logik.logikFeld, logik.art.art, turn);
             if(patt == true)
             {
-                System.out.println(sprache.Patt());
-                for(int y = 1; y < 9; y++)
-                {
-                    for(int x = 1; x < 9; x++)
-                    {
-                        graphFeld[x][y].setEnabled(false);
-                    }
-                }
+                // System.out.println(sprache.Patt());
+                // for(int y = 1; y < 9; y++)
+                // {
+                //     for(int x = 1; x < 9; x++)
+                //     {
+                //         graphFeld[x][y].setEnabled(false);
+                //     }
+                // }
+                ende ende = new ende(3,sprache.gewahlteSprache);
+                this.setVisible(false);
+                ende.setVisible(true);
             }
         }
       
@@ -694,6 +703,8 @@ public class gui extends JFrame implements ActionListener
                             logik.freisetzer(x + 1, y);
                             ImageIcon frei = logik.logikFeld[x + 1][y].bild();
                             graphFeld[x + 1][y].setIcon(frei);
+                            turn = !turn;
+                            nachsteRunde();
                         }
                         else if(checkForRochade(aktuelleFigur, x, currentX, y) == 2)
                         {
@@ -702,6 +713,8 @@ public class gui extends JFrame implements ActionListener
                             logik.freisetzer(x - 1, y);
                             ImageIcon frei = logik.logikFeld[x - 2][y].bild();
                             graphFeld[x - 2][y].setIcon(frei);
+                            turn = !turn;
+                            nachsteRunde();
                         }
                         else
                         {
