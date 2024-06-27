@@ -355,14 +355,6 @@ public class gui extends JFrame implements ActionListener
             boolean patt = logik.CheckForPatt(logik.logikFeld, logik.art.art, turn);
             if(patt == true)
             {
-                // System.out.println(sprache.Patt());
-                // for(int y = 1; y < 9; y++)
-                // {
-                //     for(int x = 1; x < 9; x++)
-                //     {
-                //         graphFeld[x][y].setEnabled(false);
-                //     }
-                // }
                 ende ende = new ende(3,sprache.gewahlteSprache);
                 this.setVisible(false);
                 ende.setVisible(true);
@@ -382,6 +374,7 @@ public class gui extends JFrame implements ActionListener
             nachsteRunde();
         }
         
+        // alles Buttons, um den Bauern umzuandern
         if(event.getSource() == dameweiss)
         {
             dameweiss.setVisible(false);
@@ -536,6 +529,7 @@ public class gui extends JFrame implements ActionListener
                     figur = logik.logikFeld[x][y];
                     if(!logik.logikFeld[x][y].giveID().equals("aussen") && !logik.logikFeld[x][y].giveID().equals("frei"))
                     {
+                        // falls man nochmal eine Figur derselben Farbe anklickt
                         if(turn == true && figur.giveColor().equals(Color.WHITE))
                         {
                             neueEntscheidung();
@@ -556,6 +550,7 @@ public class gui extends JFrame implements ActionListener
                             currentY = y;
                             faerber(x, xs, y, ys);
                         }
+                        // hier wirde der Angriff vollfuhrt
                         else if((aktuelleFigur.giveColor().equals(Color.WHITE) && figur.giveColor().equals(Color.BLACK)) || (aktuelleFigur.giveColor().equals(Color.BLACK) && figur.giveColor().equals(Color.WHITE)) || aktuelleFigur.giveID().equals("bauer") && figur.giveID().equals("unsichtbar")) // hier wird angegriffen
                         {
                             aktuelleFigur.setFirstfalse();
@@ -577,6 +572,7 @@ public class gui extends JFrame implements ActionListener
                                 }
                             }
                             playZug();
+                            // hier wird die Umwandlung der Figuren angeboten
                             if(aktuelleFigur.giveID().equals("bauer") && (y == 1 || y == 8))
                             {
                                 if(turn == true && y == 1)
@@ -613,6 +609,7 @@ public class gui extends JFrame implements ActionListener
                                     }
                                 }
                             }
+                            // normaler Zug
                             else
                             {
                                 logik.logikFeld[x][y] = aktuelleFigur;
@@ -628,9 +625,9 @@ public class gui extends JFrame implements ActionListener
                     }
                     else
                     {
+                        // Moglich-Machung des En passant
                         if(aktuelleFigur.giveID().equals("bauer"))
                         {
-                            // Moglich-Machung des En passant
                             if(turn == true)
                             {
                                 if(y == currentY - 2) // wird geschaut, ob der Bauer seinen "Sprung" gemacht hat
@@ -729,6 +726,7 @@ public class gui extends JFrame implements ActionListener
 
     }
 
+    // hier wird geschaut ob eine Rochade stattfinden kann
     public int checkForRochade(universell figur, int newX, int currentX, int y)
     {
         if(figur.giveID().equals("konig"))
@@ -768,6 +766,7 @@ public class gui extends JFrame implements ActionListener
         return 0;
     }
 
+    // farbt die Felder passend, um Hasslichkeit zu vermeiden
     public void faerber(int x, int[] xs, int y, int[] ys)
     {
         for(int i = 0; i < xs.length; i++)

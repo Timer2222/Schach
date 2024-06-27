@@ -28,7 +28,6 @@ public class frei implements universell
         return new ImageIcon(scaledImage);
     }
 
-    // Hier nur Platzhalter, damit Code funktioniert
     public Color giveColor()
     {
         return Color.PINK;

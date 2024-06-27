@@ -38,7 +38,6 @@ public class springer implements universell
         return Color.PINK;
     }
 
-    // Hier nur Platzhalter, damit Code funktioniert
     public Color giveColor()
     {
         return eigeneFarbe;

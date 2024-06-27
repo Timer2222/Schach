@@ -59,6 +59,7 @@ public class logik {
         }
     }
 
+    // hier wird gecheckt, ob man im Schach steht noch vor dem Zug
     public boolean anfangsCheckForSchach(universell[][] logikfeld, universell[][] artfeld)
     {
         for(int y = 1; y < 9; y++)
@@ -81,6 +82,7 @@ public class logik {
         return false;
     }
 
+    // das soll das schnelle Checken von Schach fur sie CheckForSchach-Methode sein und funktioniert genauso
     public boolean fastCheckForSchach(universell[][] logikfeld, universell[][] artfeld, boolean turn) 
     {
         boolean schach = false; // false = nichts, true = schach
@@ -127,11 +129,11 @@ public class logik {
         {
             for (int x = 1; x < 9; x++) 
             {
-                if (logikfeld[x][y].giveID().equals("konig")) 
+                if (logikfeld[x][y].giveID().equals("konig")) // so wird nur nach einem Konig gesucht
                 {
                     if (turn == true && logikfeld[x][y].giveColor().equals(Color.WHITE)) 
                     {
-                        if (artfeld[x][y].giveID().equals("angriff") && artfeld[x][y].giveAbstammungColor().equals(Color.BLACK)) 
+                        if (artfeld[x][y].giveID().equals("angriff") && artfeld[x][y].giveAbstammungColor().equals(Color.BLACK)) // hier wird geschaut, ob er im Schach steht
                         {
                             schach = 1;
                             fertig = true;
@@ -189,6 +191,8 @@ public class logik {
             
             }
             
+            // hier wird fur jede Figur, die dieselbe Farbe haben, wie der im Schach stehende Konig, gepruft, ob sie ein Matt verhindern konnen, falls eine Figur es nicht kann wird sie fur den Zug deaktiviert.
+            // falls alle Figuren nicht helfen konnen haben wir Matt
             for(int y = 1; y < 9; y++)
             {
                 for(int x = 1; x < 9; x++)
@@ -269,7 +273,7 @@ public class logik {
         return schach;
     }
 
-
+    // hier wird geschaut, ob sich keine Figur bewegen kann und der Konig nicht im Schach steht
     public boolean CheckForPatt(universell[][] logikfeld, universell[][] artfeld, boolean turn) {
         int figuren = 0; // figuren auf dem Feld
         int nullerfiguren = 0; // figuren auf dem Feld, die sich nicht bewegen konnen
@@ -311,6 +315,7 @@ public class logik {
         }
     }
 
+    // hier werden zu den Checks die Infos geholt
     public int[] getX(universell figur, int eigx, int eigy) {
         return figur.xmoglichesFeld(figur.giveFirst(), logikFeld, art.art, eigx, eigy);
     }
@@ -319,6 +324,7 @@ public class logik {
         return figur.ymoglichesFeld(figur.giveFirst(), logikFeld, art.art, eigx, eigy);
     }
 
+    // dafur da um kein "null"-Feld zu haben
     public void freisetzer(int x, int y) {
         logikFeld[x][y] = new frei();
     }

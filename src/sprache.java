@@ -1,14 +1,13 @@
 package src;
 
 
-public class sprache 
+public class sprache // diese KLasse ist nur fur die einzelnen Ubersetzungen da
 {
     String gewahlteSprache;
     public sprache(String wahl)
     {
         gewahlteSprache = wahl;
     }
-    // Deutsch
     public String startenButton()
     {
         if(gewahlteSprache.equals("Deutsch"))

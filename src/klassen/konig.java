@@ -6,7 +6,6 @@ public class konig implements universell
 {
     public Color eigeneFarbe;
     public String eigeneFarbenLink, name;
-    public int eigenePos;
     public boolean first;
 
     public konig(Color farbeColor, String farbeString, String id)
@@ -36,7 +35,6 @@ public class konig implements universell
         return new ImageIcon(scaledImage);
     }
 
-    // Hier nur Platzhalter, damit Code funktioniert
     public Color giveAbstammungColor()
     {
         return Color.PINK;

@@ -29,6 +29,7 @@ public class felderart
         }
     }
 
+    // um die Aktualisierungen richtig zu machen
     public universell[][] clearer(universell[][] artfeld)
     {
         for(int y = 1; y < 9; y++)
@@ -41,6 +42,7 @@ public class felderart
         return artfeld;
     }
 
+    // aktualisiert die so, dass das Feld am Anfang gecheckt werden kann
     public universell[][] aktualisierenForAnfangsCheck(boolean turn, universell[][] artfeld, universell[][] logikfeld) // bereitet das feldenart-feld zur anfangsuberprufung vor
     {
         artfeld = clearer(artfeld);
@@ -102,6 +104,7 @@ public class felderart
         return art;
     }
 
+    // aktualisiert die felderart passend, um Schach zu checken
     public universell[][] aktualisieren(boolean turn, universell[][] artfeld, universell[][] logikfeld)
     {
         artfeld = clearer(artfeld);

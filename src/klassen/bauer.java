@@ -6,7 +6,6 @@ public class bauer implements universell
 {
     public Color eigeneFarbe;
     public String eigeneFarbenLink, name;
-    public int eigenePos;
     public boolean erstemal;
 
     public bauer(Color farbeColor, String farbeString, String id, boolean first) 

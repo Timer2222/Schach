@@ -7,7 +7,6 @@ public class dame implements universell
     // in dieser Klasse wird grundsatzlich so vorgegangen, dass der Code vom Turm und Laufer verbunden wird, um Zeit und Energie zu sparen
     public Color eigeneFarbe;
     public String eigeneFarbenLink, name;
-    public int eigenePos;
 
     public dame(Color farbeColor, String farbeString, String id)
     {
@@ -34,7 +33,6 @@ public class dame implements universell
         return new ImageIcon(scaledImage);
     }
 
-    // Hier nur Platzhalter, damit Code funktioniert
     public Color giveColor()
     {
         return eigeneFarbe;

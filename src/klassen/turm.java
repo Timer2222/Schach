@@ -6,7 +6,6 @@ public class turm implements universell
 {
     public Color eigeneFarbe;
     public String eigeneFarbenLink, name;
-    public int eigenePos;
     public boolean first;
 
     public turm(Color farbeColor, String farbeString, String id)
@@ -35,8 +34,7 @@ public class turm implements universell
         Image scaledImage = image.getScaledInstance(70, 70, Image.SCALE_SMOOTH); // Bild skalieren
         return new ImageIcon(scaledImage);
     }
-
-    // Hier nur Platzhalter, damit Code funktioniert
+    
     public Color giveColor()
     {
         return eigeneFarbe;

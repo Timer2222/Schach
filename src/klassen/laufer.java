@@ -6,7 +6,6 @@ public class laufer implements universell
 {
     public Color eigeneFarbe;
     public String eigeneFarbenLink, name;
-    public int eigenePos;
 
     public laufer(Color farbeColor, String farbeString, String id)
     {
@@ -33,8 +32,6 @@ public class laufer implements universell
         return new ImageIcon(scaledImage);
     }
 
-
-    // Hier nur Platzhalter, damit Code funktioniert
     public Color giveColor()
     {
         return eigeneFarbe;
