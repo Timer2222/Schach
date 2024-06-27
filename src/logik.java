@@ -203,12 +203,20 @@ public class logik {
                             gegnerfigur = logikfeld[x + xs[i]][y + ys[i]];
                             logikfeld[x][y] = new frei();
                             logikfeld[x + xs[i]][y + ys[i]] = probierfigur;
+                            artfeld = art.aktualisieren(turn, artfeld, logikfeld);
                             check = fastCheckForSchach(logikfeld, artfeld, turn);
                             if(check)
                             {
                                 logikfeld[x + xs[i]][y + ys[i]] = gegnerfigur;
                                 logikfeld[x][y] = probierfigur;
+                                artfeld = art.aktualisieren(turn, artfeld, logikfeld);
                                 nichtsnutz++;
+                            }
+                            else
+                            {
+                                logikfeld[x + xs[i]][y + ys[i]] = gegnerfigur;
+                                logikfeld[x][y] = probierfigur;
+                                artfeld = art.aktualisieren(turn, artfeld, logikfeld);
                             }
                         }
                         if (nichtsnutz == xs.length)
@@ -216,6 +224,7 @@ public class logik {
                             graphfeld[x][y].setEnabled(false);
                             nichtVerfugbar++;
                         }
+                        nichtsnutz = 0;
                     }
                     else if(turn == false && logikfeld[x][y].giveColor().equals(Color.BLACK))
                     {

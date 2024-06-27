@@ -732,7 +732,7 @@ public class dame implements universell
     public int[] giveAngriffX(universell[][] feld, universell[][] art, int eigX, int eigY)
     {
         // wie Schauer
-        int[] angX = new int[31]; // 27 weil Turm + Laufer
+        int[] angX = new int[31]; // 31 weil Turm + Laufer
         int[] moglichkeit = schauer(feld, art, eigX, eigY);
         // Turm
         int Xzaehler = -1;

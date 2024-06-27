@@ -167,32 +167,103 @@ public class konig implements universell
                 }
                 if(eigeneFarbe.equals(Color.WHITE))
                 {
-                    if((art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)) || feld[eigX + x][eigY + y].giveColor().equals(Color.WHITE) || feld[eigX + x][eigY + y].giveID().equals("aussen"))
+                    if(moglichkeiten[zaehler] == 0)
                     {
-                        moglichkeiten[zaehler] = 2;
-                    }
-                    else if(feld[eigX + x][eigY + y].giveColor().equals(Color.BLACK))
-                    {
-                        moglichkeiten[zaehler] = 1;
-                    }
-                    else
-                    {
-                        moglichkeiten[zaehler] = 0;
+                        if((art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)) || feld[eigX + x][eigY + y].giveColor().equals(Color.WHITE) || feld[eigX + x][eigY + y].giveID().equals("aussen"))
+                        {
+                            moglichkeiten[zaehler] = 2;
+                            if(zaehler == 0 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)))
+                            {
+                                moglichkeiten[7] = 2;
+                            }
+                            else if(zaehler == 1 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)))
+                            {
+                                moglichkeiten[6] = 2;
+                            }
+                            else if(zaehler == 2 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)))
+                            {
+                                moglichkeiten[5] = 2;
+                            }
+                            else if(zaehler == 3 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)))
+                            {
+                                moglichkeiten[4] = 2;
+                            }
+                            else if(zaehler == 4 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)))
+                            {
+                                moglichkeiten[3] = 2;
+                            }
+                            else if(zaehler == 5 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)))
+                            {
+                                moglichkeiten[2] = 2;
+                            }
+                            else if(zaehler == 6 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)))
+                            {
+                                moglichkeiten[1] = 2;
+                            }
+                            else if(zaehler == 7 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.BLACK)))
+                            {
+                                moglichkeiten[0] = 2;
+                            }
+    
+                        }
+                        else if(feld[eigX + x][eigY + y].giveColor().equals(Color.BLACK))
+                        {
+                            moglichkeiten[zaehler] = 1;
+                        }
+                        else
+                        {
+                            moglichkeiten[zaehler] = 0;
+                        }
                     }
                 }
                 else
                 {
-                    if(art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE) || feld[eigX + x][eigY + y].giveColor().equals(Color.BLACK) || feld[eigX + x][eigY + y].giveID().equals("aussen"))
+                    if(moglichkeiten[zaehler] == 0)
                     {
-                        moglichkeiten[zaehler] = 2;
-                    }
-                    else if(feld[eigX + x][eigY + y].giveColor().equals(Color.WHITE))
-                    {
-                        moglichkeiten[zaehler] = 1;
-                    }
-                    else
-                    {
-                        moglichkeiten[zaehler] = 0;
+                        if(art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE) || feld[eigX + x][eigY + y].giveColor().equals(Color.BLACK) || feld[eigX + x][eigY + y].giveID().equals("aussen"))
+                        {
+                            moglichkeiten[zaehler] = 2;
+                            if(zaehler == 0 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE)))
+                            {
+                                moglichkeiten[7] = 2;
+                            }
+                            else if(zaehler == 1 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE)))
+                            {
+                                moglichkeiten[6] = 2;
+                            }
+                            else if(zaehler == 2 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE)))
+                            {
+                                moglichkeiten[5] = 2;
+                            }
+                            else if(zaehler == 3 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE)))
+                            {
+                                moglichkeiten[4] = 2;
+                            }
+                            else if(zaehler == 4 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE)))
+                            {
+                                moglichkeiten[3] = 2;
+                            }
+                            else if(zaehler == 5 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE)))
+                            {
+                                moglichkeiten[2] = 2;
+                            }
+                            else if(zaehler == 6 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE)))
+                            {
+                                moglichkeiten[1] = 2;
+                            }
+                            else if(zaehler == 7 && (art[eigX + x][eigY + y].giveID().equals("angriff") && art[eigX + x][eigY + y].giveAbstammungColor().equals(Color.WHITE)))
+                            {
+                                moglichkeiten[0] = 2;
+                            }
+                        }
+                        else if(feld[eigX + x][eigY + y].giveColor().equals(Color.WHITE))
+                        {
+                            moglichkeiten[zaehler] = 1;
+                        }
+                        else
+                        {
+                            moglichkeiten[zaehler] = 0;
+                        }
                     }
                 }
                 zaehler++;
